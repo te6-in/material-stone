@@ -1,0 +1,44 @@
+{
+	"name": "material-stone",
+	"displayName": "Material Stone Themes",
+	"description": "Warm-stone dark/light themes. High contrast by default.",
+	"version": "0.0.3",
+	"publisher": "te6",
+	"license": "GPL-3.0-only",
+	"engines": {
+		"vscode": "^1.43.1"
+	},
+	"icon": "./icon.png",
+	"categories": [
+		"Themes"
+	],
+	"keywords": [
+		"material",
+		"stone",
+		"warm",
+		"brown"
+	],
+	"homepage": "https://github.com/te6-in/material-stone",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/te6-in/material-stone.git"
+	},
+	"qna": "https://github.com/te6-in/material-stone/issues",
+	"bugs": {
+		"url": "https://github.com/te6-in/material-stone/issues"
+	},
+	"contributes": {
+		"themes": [
+			{
+				"label": "Material Stone Light",
+				"uiTheme": "vs",
+				"path": "./themes/light.json"
+			},
+			{
+				"label": "Material Stone Dark",
+				"uiTheme": "vs-dark",
+				"path": "./themes/dark.json"
+			}
+		]
+	}
+}
