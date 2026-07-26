@@ -46,31 +46,22 @@ for (const name of Object.keys(tokens)) {
  * number into an arbitrary id, and the first thing to break is whichever role
  * assumed 900 sat further out than 700.
  *
- * A slot with no value in a mode yet makes no claim, so it is skipped rather
- * than failed — which is also why the light half of this only bites once the
- * light ground itself is written.
+ * Every slot answers in every mode, so nothing here abstains: a ramp this
+ * cannot measure fails rather than quietly shrinking to the part it could.
  */
 test.each(["theme-dark", "theme-light"] satisfies Mode[])("the %s ramps climb away from the ground", (mode) => {
   const resolve = createResolver(tokens, mode);
 
-  const measure = (name: string) => {
-    try {
-      return Math.abs(lightness(resolve(name).hex) - lightness(resolve("$color.surface.canvas").hex));
-    } catch {
-      return null;
-    }
-  };
+  const ground = lightness(resolve("$color.surface.canvas").hex);
+  const distance = (name: string) => Math.abs(lightness(resolve(name).hex) - ground);
 
   const backwards: string[] = [];
   for (const slots of ramps.values()) {
-    const measured = [...slots]
-      .sort((a, b) => slot(a) - slot(b))
-      .map((name) => ({ name, distance: measure(name) }))
-      .filter((entry) => entry.distance !== null);
+    const measured = [...slots].sort((a, b) => slot(a) - slot(b)).map((name) => ({ name, distance: distance(name) }));
 
     measured.forEach((entry, index) => {
       const nearer = measured[index - 1];
-      if (!nearer || entry.distance === null || nearer.distance === null) return;
+      if (!nearer) return;
 
       if (entry.distance < nearer.distance - TOLERANCE)
         backwards.push(`${entry.name} sits nearer the ground than ${nearer.name}`);

@@ -1,4 +1,4 @@
-import { type HexStyle, type Mode, type Token, splitAlpha, valueFor } from "./tokens";
+import { type HexStyle, type Mode, type Token, splitAlpha } from "./tokens";
 
 const PALETTE = "$color.palette.";
 const RAW = /^#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
@@ -31,9 +31,7 @@ export function lintTokens(tokens: Tokens, mode: Mode) {
   const referenced = new Set<string>();
 
   for (const [name, token] of Object.entries(tokens)) {
-    const raw = valueFor(token, mode);
-    if (raw === undefined) continue;
-
+    const raw = token.values[mode];
     const isPalette = name.startsWith(PALETTE);
 
     if (RAW.test(raw)) {

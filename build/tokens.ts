@@ -1,14 +1,29 @@
-const MODES = ["theme-light", "theme-dark"] as const;
+import { type Mode, validateDocument } from "./schema";
 
-export type Mode = (typeof MODES)[number];
+export type { Mode };
 export type HexStyle = "prefixed" | "bare";
 
-export type Token = { description?: string; values: Partial<Record<Mode, string>> };
+/**
+ * Both modes, always. A token that means the same thing in both themes writes
+ * the same reference twice rather than leaving a mode out: the pointer is one
+ * line either way, and a reader never has to know a rule to see what a token
+ * resolves to in the theme they are looking at.
+ */
+export type Token = { description?: string; values: Record<Mode, string> };
 
 const HEX = /^#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
 
+/** Throws unless the document matches `color.schema.json`. */
 export function parseTokens(source: string) {
-  return (Bun.YAML.parse(source) as Record<string, Token> | null) ?? {};
+  const document = Bun.YAML.parse(source) ?? {};
+  const problems = validateDocument(document);
+
+  if (problems.length > 0)
+    throw new Error(
+      ["token document does not match color.schema.json:", ...problems.map((problem) => `  ${problem}`)].join("\n"),
+    );
+
+  return document as Record<string, Token>;
 }
 
 /** "$color.palette.green-700/60" -> ["$color.palette.green-700", 0x60] */
@@ -17,23 +32,6 @@ export function splitAlpha(expression: string): [string, number | null] {
   if (slash === -1) return [expression, null];
 
   return [expression.slice(0, slash), Number.parseInt(expression.slice(slash + 1), 16)];
-}
-
-/**
- * Which palette entry a role points at is the semantic decision, and it holds in
- * every mode — only the palette layer is written per mode. So a token that
- * declares a reference under one mode and nothing under another points at the
- * same entry in both, and a role that genuinely needs a different entry in one
- * mode says so explicitly. A hex carries no such reading: a mode that wants one
- * has to spell it out.
- */
-export function valueFor(token: Token, mode: Mode) {
-  const own = token.values[mode];
-  if (own !== undefined) return own;
-
-  const references = [...new Set(Object.values(token.values).filter((value) => !HEX.test(value)))];
-
-  return references.length === 1 ? references[0] : undefined;
 }
 
 export function createResolver(tokens: Record<string, Token>, mode: Mode) {
@@ -45,8 +43,7 @@ export function createResolver(tokens: Record<string, Token>, mode: Mode) {
     const token = tokens[name];
     if (!token) throw new Error(`unknown token ${name}`);
 
-    const raw = valueFor(token, mode);
-    if (raw === undefined) throw new Error(`${name} has no ${mode} value`);
+    const raw = token.values[mode];
 
     if (HEX.test(raw))
       return { hex: raw.slice(0, 7), alpha: raw.length === 9 ? Number.parseInt(raw.slice(7), 16) : null };

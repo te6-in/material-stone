@@ -15,6 +15,10 @@ const COLOR = {
  * Tokens are keyed by the exact spelling, so a file that writes both `#e7e5e4`
  * and `#E7E5E4` gets two entries. That is a wart of the scaffolding, not of
  * the palette, and it disappears with the file.
+ *
+ * Each entry writes its hex under both modes because the document has to pass
+ * the schema like any other. Nothing here reads the light half — a hand-authored
+ * file is one theme, and the round trip renders it in one mode.
  */
 export function extract(source: string, hexStyle: HexStyle) {
   const names = new Map<string, string>();
@@ -31,7 +35,7 @@ export function extract(source: string, hexStyle: HexStyle) {
 
   const entries = [...names]
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([hex, name]) => `${name}:\n  values:\n    theme-dark: "#${hex}"`);
+    .map(([hex, name]) => `${name}:\n  values:\n    theme-dark: "#${hex}"\n    theme-light: "#${hex}"`);
 
   return { template, tokens: entries.join("\n") };
 }

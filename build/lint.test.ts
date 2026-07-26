@@ -3,7 +3,9 @@ import { describe, expect, test } from "bun:test";
 import { lintTemplate, lintTokens } from "./lint";
 import { parseTokens } from "./tokens";
 
-const entry = (name: string, dark: string) => `${name}:\n  values:\n    theme-dark: ${dark}`;
+/** Both modes, because a token that declares one is not a token the schema takes. */
+const entry = (name: string, value: string) =>
+  `${name}:\n  values:\n    theme-dark: ${value}\n    theme-light: ${value}`;
 
 const GREEN = entry("$color.palette.green-700", '"#c3e294"');
 const USES_GREEN = entry("$color.state.added", "$color.palette.green-700");
@@ -36,7 +38,7 @@ describe("lintTokens", () => {
   test("leaves two entries alone when they share a value in one mode and split in another", () => {
     const split = [
       '$color.palette.green-701:\n  values:\n    theme-dark: "#c3e294"\n    theme-light: "#4c6b1d"',
-      "$color.state.success:\n  values:\n    theme-dark: $color.palette.green-701",
+      entry("$color.state.success", "$color.palette.green-701"),
     ].join("\n");
 
     expect(lintTokens(parseTokens([GREEN, USES_GREEN, split].join("\n")), "theme-dark")).toEqual([]);
@@ -54,10 +56,10 @@ describe("lintTokens", () => {
     expect(problems).toContain("$color.state.error holds a raw value; only the palette layer may");
   });
 
-  test("passes the real token file", async () => {
+  test.each(["theme-dark", "theme-light"] as const)("passes the real token file in %s", async (mode) => {
     const tokens = parseTokens(await Bun.file(`${import.meta.dir}/../color.yaml`).text());
 
-    expect(lintTokens(tokens, "theme-dark")).toEqual([]);
+    expect(lintTokens(tokens, mode)).toEqual([]);
   });
 });
 

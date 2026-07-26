@@ -10,7 +10,8 @@
     "unlink": "bun run build/link.ts --unlink"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "ajv": "^8.20.0"
   },
   "peerDependencies": {
     "typescript": "^5"

@@ -20,6 +20,14 @@ that each point at one palette entry. Role groups stay independent even where th
 `ansi.red` is a contract with every program you run, `syntax.tag` is a styling
 choice, and one must not move because the other did.
 
+[`color.schema.json`](./color.schema.json) is the shape of that file: what a name
+may look like, what a value may look like, and that every token writes both
+themes. `color.yaml` points at it on its first line, so an editor flags a typo
+while it is being typed and the build refuses the file either way. Everything
+that needs to compare two tokens — a hex declared twice, a palette entry nothing
+points at, a semantic token leaning on another instead of on the palette — is in
+`build/lint.ts` instead, because no per-token schema can see it.
+
 Every theme file under `themes/` is generated. Each has a template in
 [`templates/`](./templates) that is its native format verbatim, with token
 expressions where the colors go, so nothing about a tool's file needs modeling:
@@ -43,9 +51,13 @@ If the tool's themes directory is itself a symlink — into a dotfiles repo, say
 `link` stops and says so rather than writing through it, because the links would
 land in that repo instead of in `$HOME`.
 
-Every tool gets both variants, from one palette between them: a semantic token
-names its palette entry once and that pointer holds in both themes, so only the
-palette layer is written twice.
+Every tool gets both variants, from one palette between them. A semantic token
+names the palette entry it wants under each theme, and most of them name the same
+one twice: which entry a role points at is a decision that holds in both, and the
+value it lands on is not. So a difference between the two lines means a role that
+genuinely wants a different entry under one theme, and nothing else — there is no
+rule about omission to know, and a forgotten mode is an error rather than a
+shorthand.
 
 How the two arrive depends on what the tool can do with them. fish reads the
 terminal's background and switches itself, so its variants live in one file

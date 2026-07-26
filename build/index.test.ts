@@ -17,6 +17,8 @@ beforeAll(async () => {
   await cp(`${REPO}/build`, `${root}/build`, { recursive: true });
   await cp(`${REPO}/templates`, `${root}/templates`, { recursive: true });
   await cp(`${REPO}/color.yaml`, `${root}/color.yaml`);
+  // The build reads the schema at import time, so a copy without it cannot run.
+  await cp(`${REPO}/color.schema.json`, `${root}/color.schema.json`);
 });
 
 afterAll(() => rm(root, { recursive: true, force: true }));

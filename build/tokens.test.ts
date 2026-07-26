@@ -2,15 +2,31 @@ import { describe, expect, test } from "bun:test";
 
 import { createResolver, parseTokens } from "./tokens";
 
-const entry = (name: string, dark: string) => `${name}:\n  values:\n    theme-dark: ${dark}`;
+/** Both modes, because a token that declares one is not a token the schema takes. */
+const entry = (name: string, value: string) =>
+  `${name}:\n  values:\n    theme-dark: ${value}\n    theme-light: ${value}`;
 
-const GREEN = entry("$color.palette.green-700", '"#c3e294"');
+/** The one shape worth spelling out by hand: a slot whose themes disagree. */
+const split = (name: string, dark: string, light: string) =>
+  `${name}:\n  values:\n    theme-dark: ${dark}\n    theme-light: ${light}`;
+
+const GREEN = split("$color.palette.green-700", '"#c3e294"', '"#4c6b1d"');
 
 describe("parseTokens", () => {
   test("returns every declared token", () => {
     const tokens = parseTokens([GREEN, entry("$color.state.added", "$color.palette.green-700")].join("\n"));
 
     expect(Object.keys(tokens)).toEqual(["$color.palette.green-700", "$color.state.added"]);
+  });
+
+  test("reads an empty document as no tokens", () => {
+    expect(parseTokens("")).toEqual({});
+  });
+
+  test("throws on a token that declares only one mode", () => {
+    const half = '$color.palette.green-700:\n  values:\n    theme-dark: "#c3e294"';
+
+    expect(() => parseTokens(half)).toThrow(/\$color\.palette\.green-700 declares no theme-light/);
   });
 });
 
@@ -25,6 +41,30 @@ describe("resolve", () => {
     const resolve = createResolver(parseTokens([GREEN, entry("$color.state.added", "$color.palette.green-700")].join("\n")), "theme-dark");
 
     expect(resolve("$color.state.added")).toEqual({ hex: "#c3e294", alpha: null });
+  });
+
+  // The whole reason the pointer is written twice: the role is the same in both
+  // themes and the value it lands on is not.
+  test("reads the mode's own end of the slot the reference names", () => {
+    const tokens = parseTokens([GREEN, entry("$color.state.added", "$color.palette.green-700")].join("\n"));
+
+    expect(createResolver(tokens, "theme-dark")("$color.state.added")).toEqual({ hex: "#c3e294", alpha: null });
+    expect(createResolver(tokens, "theme-light")("$color.state.added")).toEqual({ hex: "#4c6b1d", alpha: null });
+  });
+
+  test("lets a role point at a different slot in each mode", () => {
+    const resolve = createResolver(
+      parseTokens(
+        [
+          GREEN,
+          split("$color.palette.red-700", '"#e97c82"', '"#83161c"'),
+          split("$color.state.added", "$color.palette.green-700", "$color.palette.red-700"),
+        ].join("\n"),
+      ),
+      "theme-light",
+    );
+
+    expect(resolve("$color.state.added")).toEqual({ hex: "#83161c", alpha: null });
   });
 
   test("follows a chain of references", () => {
@@ -92,30 +132,13 @@ describe("resolve", () => {
 
   test("throws on a reference cycle", () => {
     const resolve = createResolver(
-      parseTokens([entry("$color.a", "$color.b"), entry("$color.b", "$color.a")].join("\n")),
+      parseTokens(
+        [entry("$color.state.error", "$color.state.deleted"), entry("$color.state.deleted", "$color.state.error")].join("\n"),
+      ),
       "theme-dark",
     );
 
-    expect(() => resolve("$color.a")).toThrow(/cycle/);
-  });
-
-  test("throws when the token has no value for the mode", () => {
-    const resolve = createResolver(parseTokens(GREEN), "theme-light");
-
-    expect(() => resolve("$color.palette.green-700")).toThrow(/no theme-light value/);
-  });
-
-  test("carries a reference into a mode the token does not declare", () => {
-    const light = '$color.palette.green-700:\n  values:\n    theme-light: "#4c6b1d"';
-    const resolve = createResolver(parseTokens([light, entry("$color.state.added", "$color.palette.green-700")].join("\n")), "theme-light");
-
-    expect(resolve("$color.state.added")).toEqual({ hex: "#4c6b1d", alpha: null });
-  });
-
-  test("does not carry a hex into a mode the token does not declare", () => {
-    const resolve = createResolver(parseTokens([GREEN, entry("$color.state.added", "$color.palette.green-700")].join("\n")), "theme-light");
-
-    expect(() => resolve("$color.state.added")).toThrow(/\$color\.palette\.green-700 has no theme-light value/);
+    expect(() => resolve("$color.state.error")).toThrow(/cycle/);
   });
 
   test("keeps working after a failed lookup", () => {
