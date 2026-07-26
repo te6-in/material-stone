@@ -39,6 +39,15 @@ describe("lintTokens", () => {
     expect(problems).toContain("#c3e294 is declared twice: $color.palette.green-700, $color.palette.green-701");
   });
 
+  test("leaves two entries alone when they share a value in one mode and split in another", () => {
+    const split = [
+      '    $color.palette.green-701:\n      values:\n        theme-dark: "#c3e294"\n        theme-light: "#4c6b1d"',
+      "    $color.state.success:\n      values:\n        theme-dark: $color.palette.green-701",
+    ].join("\n");
+
+    expect(lintTokens(doc([GREEN, USES_GREEN, split].join("\n")), "theme-dark")).toEqual([]);
+  });
+
   test("flags a palette entry nothing points at", () => {
     const problems = lintTokens(doc(GREEN), "theme-dark");
 

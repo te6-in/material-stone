@@ -13,7 +13,7 @@
 		"badge.background": "#00000030",
 		"badge.foreground": "#4a4a4a",
 		"breadcrumb.activeSelectionForeground": "#c2bdba",
-		"breadcrumb.background": "#1d1917",
+		"breadcrumb.background": "#181513",
 		"breadcrumb.focusForeground": "#e7e5e4",
 		"breadcrumb.foreground": "#928076",
 		"breadcrumbPicker.background": "#1d1917",
@@ -225,6 +225,20 @@
 		"titleBar.inactiveForeground": "#928076",
 		"tree.indentGuidesStroke": "#49403b",
 		"widget.shadow": "#00000030"
+	},
+	"semanticTokenColors": {
+		"*.deprecated": { "strikethrough": true },
+		"*.defaultLibrary": { "italic": true },
+		"*.async": { "italic": true },
+		"function": "#8cadf5",
+		"method": "#8cadf5",
+		"class": "#f6c977",
+		"interface": "#f6c977",
+		"enum": "#f6c977",
+		"type": "#f6c977",
+		"string": "#c3e294",
+		"comment": { "foreground": "#928076", "italic": true },
+		"parameter": { "italic": true }
 	},
 	"tokenColors": [
 		{

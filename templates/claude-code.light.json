@@ -1,6 +1,6 @@
 {
-  "name": "material-stone-dark",
-  "base": "dark",
+  "name": "material-stone-light",
+  "base": "light",
   "overrides": {
     "text": "${$color.fg.default}",
     "inverseText": "${$color.fg.inverted}",
@@ -24,17 +24,20 @@
     "diffRemovedWord": "${$color.diff.removed-word}",
 
     "autoAccept": "${$color.spectrum.purple}",
+    "autoAcceptShimmer": "${$color.spectrum.purple-light}",
+    "skill": "${$color.spectrum.purple}",
+    "effortUltra": "${$color.spectrum.purple}",
     "bashBorder": "${$color.spectrum.purple}",
 
-    "claude": "${$color.brand.claude}",
-    "claudeShimmer": "${$color.brand.claude-light}",
+    "claude": "#d77757",
+    "claudeShimmer": "#eb9f7f",
     "claudeBlue_FOR_SYSTEM_SPINNER": "${$color.spectrum.blue}",
     "claudeBlueShimmer_FOR_SYSTEM_SPINNER": "${$color.spectrum.blue-light}",
-    "clawd_body": "${$color.brand.claude}",
+    "clawd_body": "#d77757",
     "clawd_background": "${$color.surface.void}",
 
     "briefLabelYou": "${$color.spectrum.green}",
-    "briefLabelClaude": "${$color.brand.claude}",
+    "briefLabelClaude": "#d77757",
 
     "permission": "${$color.spectrum.green}",
     "permissionShimmer": "${$color.spectrum.green-light}",
@@ -49,7 +52,7 @@
 
     "userMessageBackground": "${$color.surface.input}",
     "userMessageBackgroundHover": "${$color.surface.selected}",
-    "messageActionsBackground": "${$color.surface.raised}",
+    "composerSidebarBackground": "${$color.surface.raised}",
     "selectionBg": "${$color.surface.selected}",
     "bashMessageBackgroundColor": "${$color.surface.input}",
     "memoryBackgroundColor": "${$color.surface.selected}",

@@ -13,7 +13,7 @@
 		"badge.background": "${$color.surface.sunken}",
 		"badge.foreground": "${$color.fg.on-badge}",
 		"breadcrumb.activeSelectionForeground": "${$color.fg.emphasis}",
-		"breadcrumb.background": "${$color.surface.chrome}",
+		"breadcrumb.background": "${$color.surface.canvas}",
 		"breadcrumb.focusForeground": "${$color.fg.default}",
 		"breadcrumb.foreground": "${$color.fg.muted}",
 		"breadcrumbPicker.background": "${$color.surface.chrome}",
@@ -225,6 +225,20 @@
 		"titleBar.inactiveForeground": "${$color.fg.muted}",
 		"tree.indentGuidesStroke": "${$color.fg.faint}",
 		"widget.shadow": "${$color.overlay.shadow}"
+	},
+	"semanticTokenColors": {
+		"*.deprecated": { "strikethrough": true },
+		"*.defaultLibrary": { "italic": true },
+		"*.async": { "italic": true },
+		"function": "${$color.syntax.function}",
+		"method": "${$color.syntax.function}",
+		"class": "${$color.syntax.type}",
+		"interface": "${$color.syntax.type}",
+		"enum": "${$color.syntax.type}",
+		"type": "${$color.syntax.type}",
+		"string": "${$color.syntax.string}",
+		"comment": { "foreground": "${$color.syntax.comment}", "italic": true },
+		"parameter": { "italic": true }
 	},
 	"tokenColors": [
 		{

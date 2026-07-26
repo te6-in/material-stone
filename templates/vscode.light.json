@@ -1,0 +1,507 @@
+{
+	"$schema": "vscode://schemas/color-theme",
+	"name": "Material Stone Light",
+	"type": "light",
+	"semanticHighlighting": true,
+	"colors": {
+		"activityBar.activeBorder": "${$color.stroke.emphasis}",
+		"activityBar.background": "${$color.surface.chrome}",
+		"activityBar.border": "${$color.stroke.default/60}",
+		"activityBar.foreground": "${$color.fg.default}",
+		"activityBarBadge.background": "${$color.fg.emphasis}",
+		"activityBarBadge.foreground": "${$color.fg.on-accent}",
+		"badge.background": "${$color.surface.sunken}",
+		"badge.foreground": "${$color.fg.on-badge}",
+		"breadcrumb.activeSelectionForeground": "${$color.fg.emphasis}",
+		"breadcrumb.background": "${$color.surface.canvas}",
+		"breadcrumb.focusForeground": "${$color.fg.default}",
+		"breadcrumb.foreground": "${$color.fg.muted}",
+		"breadcrumbPicker.background": "${$color.surface.chrome}",
+		"button.background": "${$color.surface.match/50}",
+		"button.foreground": "${$color.fg.on-dark}",
+		"debugConsole.errorForeground": "${$color.state.error}",
+		"debugConsole.infoForeground": "${$color.spectrum.cyan}",
+		"debugConsole.warningForeground": "${$color.state.warning}",
+		"debugToolBar.background": "${$color.surface.raised}",
+		"diffEditor.insertedTextBackground": "${$color.diff.added-fill-subtle}",
+		"diffEditor.removedTextBackground": "${$color.diff.removed-fill-subtle}",
+		"dropdown.background": "${$color.surface.raised}",
+		"dropdown.border": "${$color.stroke.hairline}",
+		"editor.background": "${$color.surface.canvas}",
+		"editor.findMatchBackground": "${$color.highlight.find-match}",
+		"editor.findMatchBorder": "${$color.stroke.emphasis}",
+		"editor.findMatchHighlightBackground": "${$color.highlight.find-match-other}",
+		"editor.findMatchHighlightBorder": "${$color.highlight.find-match-edge}",
+		"editor.findRangeHighlightBackground": "${$color.highlight.find-range/30}",
+		"editor.foreground": "${$color.fg.default}",
+		"editor.lineHighlightBackground": "${$color.highlight.selection/13}",
+		"editor.lineHighlightBorder": "${$color.surface.transparent}",
+		"editor.rangeHighlightBackground": "${$color.highlight.range}",
+		"editor.selectionBackground": "${$color.highlight.selection/14}",
+		"editor.selectionHighlightBackground": "${$color.highlight.occurrence/20}",
+		"editor.wordHighlightBackground": "${$color.highlight.selection/15}",
+		"editor.wordHighlightStrongBackground": "${$color.highlight.selection/30}",
+		"editorBracketHighlight.foreground1": "${$color.bracket.1}",
+		"editorBracketHighlight.foreground2": "${$color.bracket.2}",
+		"editorBracketHighlight.foreground3": "${$color.bracket.3}",
+		"editorBracketHighlight.foreground4": "${$color.bracket.4}",
+		"editorBracketHighlight.foreground5": "${$color.bracket.5}",
+		"editorBracketHighlight.foreground6": "${$color.bracket.6}",
+		"editorBracketHighlight.unexpectedBracket.foreground": "${$color.bracket.unmatched}",
+		"editorBracketMatch.background": "${$color.surface.raised}",
+		"editorBracketMatch.border": "${$color.bracket.match/50}",
+		"editorCursor.foreground": "${$color.caret.default}",
+		"editorError.foreground": "${$color.state.error/70}",
+		"editorGroup.border": "${$color.stroke.sunken}",
+		"editorGroup.dropBackground": "${$color.spectrum.red/80}",
+		"editorGroup.focusedEmptyBorder": "${$color.spectrum.red}",
+		"editorGroupHeader.border": "${$color.stroke.default/60}",
+		"editorGroupHeader.tabsBackground": "${$color.surface.chrome}",
+		"editorGutter.addedBackground": "${$color.diff.added-fill}",
+		"editorGutter.deletedBackground": "${$color.diff.removed-fill}",
+		"editorGutter.modifiedBackground": "${$color.state.modified/60}",
+		"editorHoverWidget.background": "${$color.surface.raised}",
+		"editorHoverWidget.border": "${$color.stroke.hairline}",
+		"editorInfo.foreground": "${$color.state.info/70}",
+		"editorInlayHint.foreground": "${$color.fg.subtle/c0}",
+		"editorLineNumber.activeForeground": "${$color.fg.muted}",
+		"editorLineNumber.foreground": "${$color.fg.faint}",
+		"editorLink.activeForeground": "${$color.fg.default}",
+		"editorMarkerNavigation.background": "${$color.fg.default/05}",
+		"editorOverviewRuler.border": "${$color.surface.raised}",
+		"editorOverviewRuler.errorForeground": "${$color.state.error/40}",
+		"editorOverviewRuler.findMatchForeground": "${$color.fg.emphasis/87}",
+		"editorOverviewRuler.infoForeground": "${$color.state.info/40}",
+		"editorOverviewRuler.warningForeground": "${$color.state.warning/40}",
+		"editorRuler.foreground": "${$color.fg.faint}",
+		"editorSuggestWidget.background": "${$color.surface.raised}",
+		"editorSuggestWidget.border": "${$color.stroke.hairline}",
+		"editorSuggestWidget.foreground": "${$color.fg.default}",
+		"editorSuggestWidget.highlightForeground": "${$color.fg.emphasis}",
+		"editorSuggestWidget.selectedBackground": "${$color.surface.pressed}",
+		"editorWarning.foreground": "${$color.state.warning/70}",
+		"editorWhitespace.foreground": "${$color.fg.default/40}",
+		"editorWidget.background": "${$color.surface.chrome}",
+		"editorWidget.border": "${$color.stroke.default/60}",
+		"editorWidget.resizeBorder": "${$color.stroke.emphasis}",
+		"extensionBadge.remoteForeground": "${$color.fg.default}",
+		"extensionButton.prominentBackground": "${$color.state.success/90}",
+		"extensionButton.prominentForeground": "${$color.fg.default}",
+		"extensionButton.prominentHoverBackground": "${$color.state.success}",
+		"focusBorder": "${$color.stroke.focus}",
+		"foreground": "${$color.fg.default}",
+		"gitDecoration.conflictingResourceForeground": "${$color.state.conflict/90}",
+		"gitDecoration.deletedResourceForeground": "${$color.state.deleted/90}",
+		"gitDecoration.ignoredResourceForeground": "${$color.state.ignored/90}",
+		"gitDecoration.modifiedResourceForeground": "${$color.state.modified/90}",
+		"gitDecoration.untrackedResourceForeground": "${$color.state.added/90}",
+		"input.background": "${$color.surface.input}",
+		"input.border": "${$color.stroke.hairline}",
+		"input.foreground": "${$color.fg.default}",
+		"input.placeholderForeground": "${$color.fg.default/60}",
+		"inputOption.activeBackground": "${$color.fg.default/30}",
+		"inputOption.activeBorder": "${$color.fg.default/30}",
+		"inputValidation.errorBorder": "${$color.state.error}",
+		"inputValidation.infoBorder": "${$color.state.info}",
+		"inputValidation.warningBorder": "${$color.state.warning}",
+		"list.activeSelectionBackground": "${$color.surface.active}",
+		"list.activeSelectionForeground": "${$color.fg.emphasis}",
+		"list.dropBackground": "${$color.spectrum.red/80}",
+		"list.focusBackground": "${$color.fg.default/20}",
+		"list.focusForeground": "${$color.fg.default}",
+		"list.highlightForeground": "${$color.fg.emphasis}",
+		"list.hoverBackground": "${$color.surface.hover}",
+		"list.hoverForeground": "${$color.fg.on-dark}",
+		"list.inactiveSelectionBackground": "${$color.surface.active}",
+		"list.inactiveSelectionForeground": "${$color.fg.emphasis}",
+		"listFilterWidget.background": "${$color.surface.sunken}",
+		"listFilterWidget.noMatchesOutline": "${$color.stroke.sunken}",
+		"listFilterWidget.outline": "${$color.stroke.sunken}",
+		"menu.background": "${$color.surface.raised}",
+		"menu.foreground": "${$color.fg.default}",
+		"menu.selectionBackground": "${$color.surface.pressed}",
+		"menu.selectionBorder": "${$color.stroke.sunken}",
+		"menu.selectionForeground": "${$color.fg.emphasis}",
+		"menu.separatorBackground": "${$color.fg.default}",
+		"menubar.selectionBackground": "${$color.surface.sunken}",
+		"menubar.selectionBorder": "${$color.stroke.sunken}",
+		"menubar.selectionForeground": "${$color.fg.emphasis}",
+		"notebook.focusedCellBorder": "${$color.stroke.emphasis}",
+		"notebook.inactiveFocusedCellBorder": "${$color.stroke.emphasis/50}",
+		"notificationLink.foreground": "${$color.fg.emphasis}",
+		"notifications.background": "${$color.surface.raised}",
+		"notifications.foreground": "${$color.fg.default}",
+		"panel.background": "${$color.surface.chrome}",
+		"panel.border": "${$color.stroke.default/60}",
+		"panelTitle.activeBorder": "${$color.stroke.emphasis}",
+		"panelTitle.activeForeground": "${$color.fg.on-dark}",
+		"panelTitle.inactiveForeground": "${$color.fg.default}",
+		"peekView.border": "${$color.stroke.sunken}",
+		"peekViewEditor.background": "${$color.surface.transparent}",
+		"peekViewEditor.matchHighlightBackground": "${$color.surface.match/50}",
+		"peekViewEditorGutter.background": "${$color.surface.input}",
+		"peekViewResult.background": "${$color.surface.input}",
+		"peekViewResult.matchHighlightBackground": "${$color.surface.match/50}",
+		"peekViewResult.selectionBackground": "${$color.fg.muted/70}",
+		"peekViewTitle.background": "${$color.surface.input}",
+		"peekViewTitleDescription.foreground": "${$color.fg.default/60}",
+		"pickerGroup.border": "${$color.stroke.group}",
+		"pickerGroup.foreground": "${$color.fg.emphasis}",
+		"progressBar.background": "${$color.fg.emphasis}",
+		"quickInput.background": "${$color.surface.raised}",
+		"quickInput.foreground": "${$color.fg.muted}",
+		"sash.hoverBorder": "${$color.stroke.emphasis/50}",
+		"scrollbar.shadow": "${$color.overlay.shadow}",
+		"scrollbarSlider.activeBackground": "${$color.fg.emphasis}",
+		"scrollbarSlider.background": "${$color.fg.default/20}",
+		"scrollbarSlider.hoverBackground": "${$color.fg.default/10}",
+		"selection.background": "${$color.overlay.strong}",
+		"settings.checkboxBackground": "${$color.surface.chrome}",
+		"settings.checkboxForeground": "${$color.fg.default}",
+		"settings.dropdownBackground": "${$color.surface.chrome}",
+		"settings.dropdownForeground": "${$color.fg.default}",
+		"settings.headerForeground": "${$color.fg.emphasis}",
+		"settings.modifiedItemIndicator": "${$color.fg.emphasis}",
+		"settings.numberInputBackground": "${$color.surface.chrome}",
+		"settings.numberInputForeground": "${$color.fg.default}",
+		"settings.textInputBackground": "${$color.surface.chrome}",
+		"settings.textInputForeground": "${$color.fg.default}",
+		"sideBar.background": "${$color.surface.chrome}",
+		"sideBar.border": "${$color.stroke.default/60}",
+		"sideBar.foreground": "${$color.fg.muted}",
+		"sideBarSectionHeader.background": "${$color.surface.chrome}",
+		"sideBarSectionHeader.border": "${$color.stroke.default/60}",
+		"sideBarTitle.foreground": "${$color.fg.default}",
+		"statusBar.background": "${$color.surface.canvas}",
+		"statusBar.border": "${$color.stroke.default/60}",
+		"statusBar.debuggingBackground": "${$color.spectrum.purple}",
+		"statusBar.debuggingForeground": "${$color.fg.on-dark}",
+		"statusBar.foreground": "${$color.fg.dim}",
+		"statusBar.noFolderBackground": "${$color.surface.raised}",
+		"statusBarItem.activeBackground": "${$color.spectrum.red/80}",
+		"statusBarItem.hoverBackground": "${$color.surface.hover-muted}",
+		"statusBarItem.remoteBackground": "${$color.fg.emphasis}",
+		"statusBarItem.remoteForeground": "${$color.fg.on-accent}",
+		"tab.activeBackground": "${$color.surface.active}",
+		"tab.activeBorder": "${$color.stroke.emphasis}",
+		"tab.activeForeground": "${$color.fg.on-dark}",
+		"tab.activeModifiedBorder": "${$color.state.modified}",
+		"tab.border": "${$color.surface.chrome}",
+		"tab.hoverBackground": "${$color.surface.hover}",
+		"tab.inactiveBackground": "${$color.surface.chrome}",
+		"tab.inactiveForeground": "${$color.fg.muted}",
+		"tab.inactiveModifiedBorder": "${$color.state.modified}",
+		"tab.unfocusedActiveBorder": "${$color.stroke.emphasis-muted}",
+		"tab.unfocusedActiveForeground": "${$color.fg.default}",
+		"tab.unfocusedActiveModifiedBorder": "${$color.state.modified}",
+		"tab.unfocusedInactiveModifiedBorder": "${$color.state.modified}",
+		"terminal.ansiBlack": "${$color.ansi.black}",
+		"terminal.ansiBlue": "${$color.ansi.blue}",
+		"terminal.ansiBrightBlack": "${$color.ansi.bright-black}",
+		"terminal.ansiBrightBlue": "${$color.ansi.bright-blue}",
+		"terminal.ansiBrightCyan": "${$color.ansi.bright-cyan}",
+		"terminal.ansiBrightGreen": "${$color.ansi.bright-green}",
+		"terminal.ansiBrightMagenta": "${$color.ansi.bright-magenta}",
+		"terminal.ansiBrightRed": "${$color.ansi.bright-red}",
+		"terminal.ansiBrightWhite": "${$color.ansi.bright-white}",
+		"terminal.ansiBrightYellow": "${$color.ansi.bright-yellow}",
+		"terminal.ansiCyan": "${$color.ansi.cyan}",
+		"terminal.ansiGreen": "${$color.ansi.green}",
+		"terminal.ansiMagenta": "${$color.ansi.magenta}",
+		"terminal.ansiRed": "${$color.ansi.red}",
+		"terminal.ansiWhite": "${$color.ansi.white}",
+		"terminal.ansiYellow": "${$color.ansi.yellow}",
+		"terminal.background": "${$color.surface.chrome}",
+		"terminal.foreground": "${$color.fg.default}",
+		"terminal.selectionBackground": "${$color.highlight.selection/26}",
+		"terminalCursor.background": "${$color.fg.on-accent}",
+		"terminalCursor.foreground": "${$color.caret.default}",
+		"textLink.activeForeground": "${$color.fg.default}",
+		"textLink.foreground": "${$color.fg.emphasis}",
+		"titleBar.activeBackground": "${$color.surface.chrome}",
+		"titleBar.activeForeground": "${$color.fg.default}",
+		"titleBar.border": "${$color.stroke.default/60}",
+		"titleBar.inactiveBackground": "${$color.surface.chrome}",
+		"titleBar.inactiveForeground": "${$color.fg.muted}",
+		"tree.indentGuidesStroke": "${$color.fg.faint}",
+		"widget.shadow": "${$color.overlay.shadow}"
+	},
+	"semanticTokenColors": {
+		"*.deprecated": { "strikethrough": true },
+		"*.defaultLibrary": { "italic": true },
+		"*.async": { "italic": true },
+		"function": "${$color.syntax.function}",
+		"method": "${$color.syntax.function}",
+		"class": "${$color.syntax.type}",
+		"interface": "${$color.syntax.type}",
+		"enum": "${$color.syntax.type}",
+		"type": "${$color.syntax.type}",
+		"string": "${$color.syntax.string}",
+		"comment": { "foreground": "${$color.syntax.comment}", "italic": true },
+		"parameter": { "italic": true }
+	},
+	"tokenColors": [
+		{
+			"scope": "markup.underline",
+			"settings": {
+				"fontStyle": "underline"
+			}
+		},
+		{
+			"scope": "variable.parameter",
+			"settings": {
+				"fontStyle": "italic"
+			}
+		},
+		{
+			"scope": "support.type.property-name.css",
+			"settings": {
+				"foreground": "${$color.syntax.property}"
+			}
+		},
+		{
+			"scope": [
+				"constant.other.symbol",
+				"meta.tag",
+				"punctuation",
+				"template.expression.begin",
+				"template.expression.end",
+				"text.html.markdown beginning.punctuation.definition.list"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.punctuation}"
+			}
+		},
+		{
+			"scope": "markup.bold",
+			"settings": {
+				"foreground": "${$color.syntax.emphasis}",
+				"fontStyle": "bold"
+			}
+		},
+		{
+			"scope": [
+				"markup.bold markup.italic",
+				"markup.italic markup.bold"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.emphasis}",
+				"fontStyle": "italic bold"
+			}
+		},
+		{
+			"scope": [
+				"constant.language",
+				"entity.name.section.group-title.ini",
+				"keyword",
+				"markup.heading",
+				"modifier",
+				"support.type.object",
+				"variable.language.this"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.keyword}"
+			}
+		},
+		{
+			"scope": [
+				"markup.italic",
+				"support.module",
+				"support.node",
+				"variable.parameter.function.language.special.self.python"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.emphasis}",
+				"fontStyle": "italic"
+			}
+		},
+		{
+			"scope": [
+				"constant.keyword",
+				"keyword.control",
+				"markup.quote"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.keyword}",
+				"fontStyle": "italic"
+			}
+		},
+		{
+			"scope": [
+				"SXNested",
+				"constant.character.escape",
+				"markup.fenced_code.block",
+				"meta.definition.variable entity.name.function",
+				"meta.embedded",
+				"meta.function-call.arguments",
+				"meta.jsx.children",
+				"meta.template.expression",
+				"punctuation.definition.entity.html",
+				"source.cpp meta.block variable.other",
+				"source.cs entity.name.type.namespace",
+				"source.groovy.embedded",
+				"source.php meta.use support.class",
+				"source.php support.other.namespace",
+				"support.constant",
+				"support.variable",
+				"text.html constant.character.entity.named",
+				"variable"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.variable}"
+			}
+		},
+		{
+			"scope": [
+				"constant.other.key",
+				"entity.name",
+				"entity.other",
+				"entity.other.attribute-name.class",
+				"meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json",
+				"meta.use",
+				"source.cs meta.class.identifier storage.type",
+				"source.cs meta.method.return-type",
+				"source.cs storage.type",
+				"source.css entity.name.tag",
+				"support.class",
+				"support.type"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.type}"
+			}
+		},
+		{
+			"scope": [
+				"constant.character.format.placeholder.other.python",
+				"constant.numeric",
+				"entity.other.attribute-name.id",
+				"keyword.other",
+				"meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.number}"
+			}
+		},
+		{
+			"scope": [
+				"constant.other.placeholder",
+				"entity.name.tag",
+				"keyword.other.definition.ini",
+				"markup.deleted",
+				"meta.block",
+				"meta.definition.method entity.name.function",
+				"meta.field.declaration entity.name.function",
+				"meta.link.reference",
+				"meta.object-literal.key",
+				"meta.object-literal.key string",
+				"meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json",
+				"source.cs meta.method.identifier entity.name.function",
+				"source.python meta.member.access.python",
+				"support.type.property-name.json",
+				"text.html.markdown meta.link.inline",
+				"variable.object.property"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.tag}"
+			}
+		},
+		{
+			"scope": "meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json",
+			"settings": {
+				"foreground": "${$color.syntax.namespace}"
+			}
+		},
+		{
+			"scope": [
+				"entity.name.function",
+				"meta.function entity.name.function",
+				"meta.function-call.arguments",
+				"meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json",
+				"source.cs entity.name.function",
+				"source.cs meta.method-call meta.method",
+				"source.python meta.function-call.python",
+				"support.function"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.function}"
+			}
+		},
+		{
+			"scope": [
+				"constant.language.boolean",
+				"meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json",
+				"punctuation.definition.quote"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.constant}"
+			}
+		},
+		{
+			"scope": [
+				"entity.other.attribute-name",
+				"meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json",
+				"meta.structure.dictionary.json support.type.property-name.json",
+				"storage.control",
+				"storage.modifier",
+				"storage.type"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.attribute}"
+			}
+		},
+		{
+			"scope": [
+				"markup.fenced_code.block.markdown punctuation.definition.markdown",
+				"markup.inline.raw.string.markdown",
+				"markup.inserted",
+				"meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json",
+				"string"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.string}"
+			}
+		},
+		{
+			"scope": "source.cs meta.preprocessor",
+			"settings": {
+				"foreground": "${$color.syntax.preprocessor}"
+			}
+		},
+		{
+			"scope": [
+				"comment",
+				"comment punctuation.definition.comment",
+				"punctuation.definition.comment",
+				"string.quoted.docstring"
+			],
+			"settings": {
+				"foreground": "${$color.syntax.comment}",
+				"fontStyle": "italic"
+			}
+		},
+		{
+			"scope": "token.info-token",
+			"settings": {
+				"foreground": "${$color.state.info}"
+			}
+		},
+		{
+			"scope": "token.warn-token",
+			"settings": {
+				"foreground": "${$color.state.warning}"
+			}
+		},
+		{
+			"scope": "token.error-token",
+			"settings": {
+				"foreground": "${$color.state.error}"
+			}
+		},
+		{
+			"scope": "token.debug-token",
+			"settings": {
+				"foreground": "${$color.spectrum.purple}"
+			}
+		}
+	]
+}

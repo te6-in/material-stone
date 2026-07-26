@@ -24,6 +24,9 @@
     "diffRemovedWord": "#e97c82",
 
     "autoAccept": "#c698e3",
+    "autoAcceptShimmer": "#d9bdea",
+    "skill": "#c698e3",
+    "effortUltra": "#c698e3",
     "bashBorder": "#c698e3",
 
     "claude": "#d77757",
@@ -49,7 +52,7 @@
 
     "userMessageBackground": "#302a26",
     "userMessageBackgroundHover": "#49403b",
-    "messageActionsBackground": "#25201d",
+    "composerSidebarBackground": "#25201d",
     "selectionBg": "#49403b",
     "bashMessageBackgroundColor": "#302a26",
     "memoryBackgroundColor": "#49403b",

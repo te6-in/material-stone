@@ -49,13 +49,13 @@ describe("--check", () => {
   test("reports drift after a byte is changed", async () => {
     await run();
 
-    const path = `${root}/themes/fish/material-stone-dark.theme`;
+    const path = `${root}/themes/fish/material-stone.theme`;
     await Bun.write(path, (await Bun.file(path).text()).replace("fish_color_error", "fish_color_erroR"));
 
     const { code, stdout } = await run("--check");
 
     expect(code).toBe(1);
-    expect(stdout).toContain("themes/fish/material-stone-dark.theme: differs from line 13");
+    expect(stdout).toContain("themes/fish/material-stone.theme: differs from line 11");
     expect(stdout).toContain("1 target(s) drifted");
   });
 });

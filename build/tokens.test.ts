@@ -115,6 +115,19 @@ describe("resolve", () => {
     expect(() => resolve("$color.palette.green-700")).toThrow(/no theme-light value/);
   });
 
+  test("carries a reference into a mode the token does not declare", () => {
+    const light = '    $color.palette.green-700:\n      values:\n        theme-light: "#4c6b1d"';
+    const resolve = createResolver(doc([light, entry("$color.state.added", "$color.palette.green-700")].join("\n")), "theme-light");
+
+    expect(resolve("$color.state.added")).toEqual({ hex: "#4c6b1d", alpha: null });
+  });
+
+  test("does not carry a hex into a mode the token does not declare", () => {
+    const resolve = createResolver(doc([GREEN, entry("$color.state.added", "$color.palette.green-700")].join("\n")), "theme-light");
+
+    expect(() => resolve("$color.state.added")).toThrow(/\$color\.palette\.green-700 has no theme-light value/);
+  });
+
   test("keeps working after a failed lookup", () => {
     const resolve = createResolver(doc([GREEN, entry("$color.state.added", "$color.palette.missing")].join("\n")), "theme-dark");
 

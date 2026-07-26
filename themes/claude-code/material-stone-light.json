@@ -1,0 +1,90 @@
+{
+  "name": "material-stone-light",
+  "base": "light",
+  "overrides": {
+    "text": "#1b1918",
+    "inverseText": "#e9e6e3",
+    "inactive": "#807066",
+    "inactiveShimmer": "#63574f",
+    "subtle": "#a2938a",
+    "promptBorder": "#807066",
+    "promptBorderShimmer": "#63574f",
+
+    "success": "#4c6b1d",
+    "error": "#83161c",
+    "warning": "#885b09",
+    "warningShimmer": "#734b01",
+    "merged": "#4a1c67",
+
+    "diffAdded": "#aeb898",
+    "diffAddedDimmed": "#c2c7b1",
+    "diffAddedWord": "#4c6b1d",
+    "diffRemoved": "#c39898",
+    "diffRemovedDimmed": "#cfb2b1",
+    "diffRemovedWord": "#83161c",
+
+    "autoAccept": "#4a1c67",
+    "autoAcceptShimmer": "#42135e",
+    "skill": "#4a1c67",
+    "effortUltra": "#4a1c67",
+    "bashBorder": "#4a1c67",
+
+    "claude": "#d77757",
+    "claudeShimmer": "#eb9f7f",
+    "claudeBlue_FOR_SYSTEM_SPINNER": "#0a2b73",
+    "claudeBlueShimmer_FOR_SYSTEM_SPINNER": "#032269",
+    "clawd_body": "#d77757",
+    "clawd_background": "#ffffff",
+
+    "briefLabelYou": "#4c6b1d",
+    "briefLabelClaude": "#d77757",
+
+    "permission": "#4c6b1d",
+    "permissionShimmer": "#446212",
+    "suggestion": "#4c6b1d",
+    "remember": "#4c6b1d",
+    "planMode": "#0a506d",
+
+    "ide": "#4c6b1d",
+    "professionalBlue": "#0a2b73",
+    "chromeYellow": "#885b09",
+    "background": "#0a506d",
+
+    "userMessageBackground": "#d2cbc6",
+    "userMessageBackgroundHover": "#bbb1ac",
+    "composerSidebarBackground": "#dbd5d1",
+    "selectionBg": "#bbb1ac",
+    "bashMessageBackgroundColor": "#d2cbc6",
+    "memoryBackgroundColor": "#bbb1ac",
+
+    "rate_limit_fill": "#4c6b1d",
+    "rate_limit_empty": "#d2cbc6",
+
+    "fastMode": "#983c1f",
+    "fastModeShimmer": "#934219",
+
+    "red_FOR_SUBAGENTS_ONLY": "#83161c",
+    "orange_FOR_SUBAGENTS_ONLY": "#983c1f",
+    "yellow_FOR_SUBAGENTS_ONLY": "#885b09",
+    "green_FOR_SUBAGENTS_ONLY": "#4c6b1d",
+    "blue_FOR_SUBAGENTS_ONLY": "#0a2b73",
+    "purple_FOR_SUBAGENTS_ONLY": "#4a1c67",
+    "pink_FOR_SUBAGENTS_ONLY": "#791b28",
+    "cyan_FOR_SUBAGENTS_ONLY": "#0a506d",
+
+    "rainbow_red": "#83161c",
+    "rainbow_orange": "#983c1f",
+    "rainbow_yellow": "#885b09",
+    "rainbow_green": "#4c6b1d",
+    "rainbow_blue": "#0a2b73",
+    "rainbow_indigo": "#493687",
+    "rainbow_violet": "#4a1c67",
+    "rainbow_red_shimmer": "#790713",
+    "rainbow_orange_shimmer": "#934219",
+    "rainbow_yellow_shimmer": "#734b01",
+    "rainbow_green_shimmer": "#446212",
+    "rainbow_blue_shimmer": "#032269",
+    "rainbow_indigo_shimmer": "#412c7d",
+    "rainbow_violet_shimmer": "#42135e"
+  }
+}
