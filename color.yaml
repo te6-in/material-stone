@@ -1,0 +1,548 @@
+kind: Tokens
+metadata:
+  id: color
+  name: Color
+  lastUpdated: 26-07-26
+data:
+  collection: color
+  tokens:
+    # ------------------------------------------------------------------
+    # Two layers, one hop. The palette holds every hex; every other token
+    # points at a palette entry and never at another semantic token.
+    #
+    # Role groups stay independent even where they land on the same value
+    # today. `ansi.red` and `syntax.tag` are both red-700 right now, but
+    # one is a contract with every program the user runs and the other is
+    # a styling choice — chaining them would make a UI decision silently
+    # rewrite the terminal.
+    #
+    # The palette scale number is ordinal, not a measurement: it counts
+    # distance from the background, so a light theme fills the same slot
+    # numbers with its own values and every token below keeps working.
+    # Slots are sparse on purpose — a missing number means no value lives
+    # there yet, not that the ramp is broken.
+    #
+    # A `/xx` suffix on a reference applies alpha, hex pair, same notation
+    # the VS Code theme uses. Tools that cannot express alpha flatten it
+    # against the ground they declare.
+    # ------------------------------------------------------------------
+
+    # stone — the warm neutral ramp. Hue holds at 55-64 the whole way up.
+    $color.palette.stone-00:
+      values:
+        theme-dark: "#181513"
+    $color.palette.stone-100:
+      values:
+        theme-dark: "#1d1917"
+    $color.palette.stone-200:
+      values:
+        theme-dark: "#25201d"
+    $color.palette.stone-300:
+      values:
+        theme-dark: "#302a26"
+    $color.palette.stone-400:
+      values:
+        theme-dark: "#49403b"
+    $color.palette.stone-500:
+      values:
+        theme-dark: "#6c5e56"
+    $color.palette.stone-600:
+      values:
+        theme-dark: "#928076"
+    $color.palette.stone-700:
+      values:
+        theme-dark: "#9e948d"
+    $color.palette.stone-800:
+      values:
+        theme-dark: "#a99b93"
+    $color.palette.stone-900:
+      values:
+        theme-dark: "#c2bdba"
+    $color.palette.stone-1000:
+      values:
+        theme-dark: "#e7e5e4"
+
+    # pure — chroma zero, deliberately off the stone ramp. ANSI black and
+    # white are a cross-terminal contract; other programs expect them
+    # neutral, so they do not get warmed.
+    $color.palette.pure-black:
+      values:
+        theme-dark: "#000000"
+    $color.palette.pure-dim:
+      values:
+        theme-dark: "#4a4a4a"
+    $color.palette.pure-light:
+      values:
+        theme-dark: "#d9d9d9"
+    $color.palette.pure-white:
+      values:
+        theme-dark: "#ffffff"
+
+    # red
+    $color.palette.red-700:
+      values:
+        theme-dark: "#e97c82"
+    $color.palette.red-800:
+      description: Hue runs 11 degrees warmer than red-700, toward orange.
+      values:
+        theme-dark: "#ff8f82"
+    $color.palette.red-900:
+      values:
+        theme-dark: "#eda4a7"
+
+    # pink — one step only. No lighter value exists yet.
+    $color.palette.pink-700:
+      values:
+        theme-dark: "#f6a1ae"
+
+    # orange
+    $color.palette.orange-500:
+      values:
+        theme-dark: "#cf845a"
+    $color.palette.orange-700:
+      values:
+        theme-dark: "#f59c80"
+    $color.palette.orange-900:
+      values:
+        theme-dark: "#ffb38b"
+
+    # yellow
+    $color.palette.yellow-600:
+      values:
+        theme-dark: "#edc68e"
+    $color.palette.yellow-700:
+      values:
+        theme-dark: "#f6c977"
+    $color.palette.yellow-900:
+      values:
+        theme-dark: "#f6d8a2"
+
+    # gold — chroma 80, the most saturated value in the palette. Kept out
+    # of the yellow ramp because it is a signal color, not a text color.
+    $color.palette.gold-700:
+      values:
+        theme-dark: "#f6ca1c"
+
+    # green
+    $color.palette.green-700:
+      values:
+        theme-dark: "#c3e294"
+    $color.palette.green-900:
+      values:
+        theme-dark: "#d6e9b7"
+
+    # cyan — six steps across two hue bands: 400-700 sit near 245, 800-900
+    # near 233. Worth collapsing later; kept apart for now.
+    $color.palette.cyan-400:
+      values:
+        theme-dark: "#79bce0"
+    $color.palette.cyan-500:
+      values:
+        theme-dark: "#88d1ff"
+    $color.palette.cyan-600:
+      values:
+        theme-dark: "#a7d2e5"
+    $color.palette.cyan-700:
+      values:
+        theme-dark: "#9ed5f6"
+    $color.palette.cyan-800:
+      values:
+        theme-dark: "#92d8f5"
+    $color.palette.cyan-900:
+      values:
+        theme-dark: "#bde5f5"
+
+    # blue
+    $color.palette.blue-700:
+      values:
+        theme-dark: "#8cadf5"
+    $color.palette.blue-900:
+      values:
+        theme-dark: "#b7cbf5"
+
+    # indigo
+    $color.palette.indigo-700:
+      values:
+        theme-dark: "#b9a5f1"
+    $color.palette.indigo-900:
+      description: >-
+        Generated, not extracted. The source theme had no light indigo, so
+        this applies the red/blue/purple 700-to-900 step (L* +10.5,
+        C* -17.1) to indigo-700 at a fixed hue.
+      values:
+        theme-dark: "#d4c6f4"
+
+    # purple
+    $color.palette.purple-700:
+      values:
+        theme-dark: "#c698e3"
+    $color.palette.purple-900:
+      values:
+        theme-dark: "#d9bdea"
+
+    # brand — off-palette on purpose. Anthropic's orange, carried so the
+    # Claude Code theme can name it instead of hard-coding it.
+    $color.palette.brand-claude:
+      values:
+        theme-dark: "#d77757"
+    $color.palette.brand-claude-light:
+      values:
+        theme-dark: "#eb9f7f"
+
+    # ------------------------------------------------------------------
+    # ansi — the sixteen terminal slots. A contract with every program the
+    # user runs, so it answers to nothing but the palette.
+    # ------------------------------------------------------------------
+
+    $color.ansi.black:
+      values:
+        theme-dark: $color.palette.pure-black
+    $color.ansi.red:
+      values:
+        theme-dark: $color.palette.red-700
+    $color.ansi.green:
+      values:
+        theme-dark: $color.palette.green-700
+    $color.ansi.yellow:
+      values:
+        theme-dark: $color.palette.yellow-700
+    $color.ansi.blue:
+      values:
+        theme-dark: $color.palette.blue-700
+    $color.ansi.magenta:
+      values:
+        theme-dark: $color.palette.purple-700
+    $color.ansi.cyan:
+      values:
+        theme-dark: $color.palette.cyan-800
+    $color.ansi.white:
+      values:
+        theme-dark: $color.palette.pure-light
+    $color.ansi.bright-black:
+      values:
+        theme-dark: $color.palette.pure-dim
+    $color.ansi.bright-red:
+      values:
+        theme-dark: $color.palette.red-900
+    $color.ansi.bright-green:
+      values:
+        theme-dark: $color.palette.green-900
+    $color.ansi.bright-yellow:
+      values:
+        theme-dark: $color.palette.yellow-900
+    $color.ansi.bright-blue:
+      values:
+        theme-dark: $color.palette.blue-900
+    $color.ansi.bright-magenta:
+      values:
+        theme-dark: $color.palette.purple-900
+    $color.ansi.bright-cyan:
+      values:
+        theme-dark: $color.palette.cyan-900
+    $color.ansi.bright-white:
+      values:
+        theme-dark: $color.palette.pure-white
+
+    # ------------------------------------------------------------------
+    # spectrum — colors chosen to stay apart from each other, for anything
+    # that labels by identity rather than by meaning: rainbow brackets,
+    # per-agent tints, categorical marks. Nothing here carries a mood.
+    # ------------------------------------------------------------------
+
+    $color.spectrum.red:
+      values:
+        theme-dark: $color.palette.red-700
+    $color.spectrum.red-light:
+      values:
+        theme-dark: $color.palette.red-900
+    $color.spectrum.orange:
+      values:
+        theme-dark: $color.palette.orange-700
+    $color.spectrum.orange-light:
+      values:
+        theme-dark: $color.palette.orange-900
+    $color.spectrum.yellow:
+      values:
+        theme-dark: $color.palette.yellow-700
+    $color.spectrum.yellow-light:
+      values:
+        theme-dark: $color.palette.yellow-900
+    $color.spectrum.green:
+      values:
+        theme-dark: $color.palette.green-700
+    $color.spectrum.green-light:
+      values:
+        theme-dark: $color.palette.green-900
+    $color.spectrum.cyan:
+      values:
+        theme-dark: $color.palette.cyan-800
+    $color.spectrum.cyan-light:
+      values:
+        theme-dark: $color.palette.cyan-900
+    $color.spectrum.blue:
+      values:
+        theme-dark: $color.palette.blue-700
+    $color.spectrum.blue-light:
+      values:
+        theme-dark: $color.palette.blue-900
+    $color.spectrum.indigo:
+      values:
+        theme-dark: $color.palette.indigo-700
+    $color.spectrum.indigo-light:
+      values:
+        theme-dark: $color.palette.indigo-900
+    $color.spectrum.purple:
+      values:
+        theme-dark: $color.palette.purple-700
+    $color.spectrum.purple-light:
+      values:
+        theme-dark: $color.palette.purple-900
+    $color.spectrum.pink:
+      description: No lighter step. The palette has one pink.
+      values:
+        theme-dark: $color.palette.pink-700
+
+    # ------------------------------------------------------------------
+    # surface — grounds, darkest first. A tool that cannot express alpha
+    # flattens against surface.canvas.
+    # ------------------------------------------------------------------
+
+    $color.surface.canvas:
+      description: The deepest ground. Editor body, terminal background.
+      values:
+        theme-dark: $color.palette.stone-00
+    $color.surface.chrome:
+      description: Everything framing the canvas — sidebars, tabs, status bar.
+      values:
+        theme-dark: $color.palette.stone-100
+    $color.surface.raised:
+      description: Floats above the canvas — menus, popovers, notifications.
+      values:
+        theme-dark: $color.palette.stone-200
+    $color.surface.input:
+      description: Fields and other surfaces that accept typing.
+      values:
+        theme-dark: $color.palette.stone-300
+    $color.surface.selected:
+      values:
+        theme-dark: $color.palette.stone-400
+    $color.surface.match:
+      description: Search hits. Brighter than a selection so the two can overlap.
+      values:
+        theme-dark: $color.palette.stone-500
+
+    # ------------------------------------------------------------------
+    # fg — foreground weights, strongest first.
+    # ------------------------------------------------------------------
+
+    $color.fg.default:
+      values:
+        theme-dark: $color.palette.stone-1000
+    $color.fg.emphasis:
+      description: Active tab, focused border, link. Brighter than default without going white.
+      values:
+        theme-dark: $color.palette.stone-900
+    $color.fg.subtle:
+      values:
+        theme-dark: $color.palette.stone-800
+    $color.fg.muted:
+      values:
+        theme-dark: $color.palette.stone-600
+    $color.fg.dim:
+      values:
+        theme-dark: $color.palette.stone-500
+    $color.fg.faint:
+      description: Line numbers, rulers, indent guides. The quietest thing still meant to be seen.
+      values:
+        theme-dark: $color.palette.stone-400
+    $color.fg.inverted:
+      description: Text sitting on a light or accent fill.
+      values:
+        theme-dark: $color.palette.stone-00
+
+    $color.stroke.default:
+      values:
+        theme-dark: $color.palette.stone-400
+    $color.stroke.emphasis:
+      values:
+        theme-dark: $color.palette.stone-900
+
+    # ------------------------------------------------------------------
+    # syntax — code roles. Named for what the token is, never for the
+    # TextMate scope or LSP kind that happens to carry it.
+    # ------------------------------------------------------------------
+
+    $color.syntax.comment:
+      values:
+        theme-dark: $color.palette.stone-600
+    $color.syntax.punctuation:
+      values:
+        theme-dark: $color.palette.stone-700
+    $color.syntax.variable:
+      values:
+        theme-dark: $color.palette.stone-1000
+    $color.syntax.keyword:
+      values:
+        theme-dark: $color.palette.cyan-400
+    $color.syntax.string:
+      values:
+        theme-dark: $color.palette.green-700
+    $color.syntax.function:
+      values:
+        theme-dark: $color.palette.blue-700
+    $color.syntax.type:
+      values:
+        theme-dark: $color.palette.yellow-700
+    $color.syntax.number:
+      values:
+        theme-dark: $color.palette.orange-700
+    $color.syntax.escape:
+      values:
+        theme-dark: $color.palette.orange-700
+    $color.syntax.attribute:
+      values:
+        theme-dark: $color.palette.indigo-700
+    $color.syntax.tag:
+      values:
+        theme-dark: $color.palette.red-700
+    $color.syntax.constant:
+      values:
+        theme-dark: $color.palette.pink-700
+    $color.syntax.property:
+      values:
+        theme-dark: $color.palette.cyan-600
+    $color.syntax.namespace:
+      values:
+        theme-dark: $color.palette.orange-500
+    $color.syntax.preprocessor:
+      values:
+        theme-dark: $color.palette.stone-500
+    $color.syntax.emphasis:
+      description: Bold and italic runs in prose markup.
+      values:
+        theme-dark: $color.palette.red-700
+
+    # bracket — rainbow pairs, outermost first. Six hues that stay apart at
+    # a glance; the seventh level wraps back to the first.
+    $color.bracket.1:
+      values:
+        theme-dark: $color.palette.cyan-500
+    $color.bracket.2:
+      values:
+        theme-dark: $color.palette.yellow-600
+    $color.bracket.3:
+      values:
+        theme-dark: $color.palette.purple-700
+    $color.bracket.4:
+      values:
+        theme-dark: $color.palette.green-700
+    $color.bracket.5:
+      values:
+        theme-dark: $color.palette.cyan-700
+    $color.bracket.6:
+      values:
+        theme-dark: $color.palette.orange-900
+    $color.bracket.unmatched:
+      values:
+        theme-dark: $color.palette.red-800
+    $color.bracket.match:
+      description: Outline drawn around the pair the caret sits on.
+      values:
+        theme-dark: $color.palette.gold-700
+
+    # ------------------------------------------------------------------
+    # caret and highlight.
+    #
+    # The three highlights stay separate on purpose. They stack: a find
+    # range can hold a selection that holds the word under the caret, so
+    # each needs to read through the one beneath it.
+    # ------------------------------------------------------------------
+
+    $color.caret.default:
+      values:
+        theme-dark: $color.palette.gold-700
+    $color.highlight.selection:
+      description: Neutral so it can sit under syntax colors without tinting them.
+      values:
+        theme-dark: $color.palette.stone-1000
+    $color.highlight.occurrence:
+      description: Other instances of the symbol under the caret.
+      values:
+        theme-dark: $color.palette.gold-700
+    $color.highlight.find-range:
+      values:
+        theme-dark: $color.palette.yellow-700
+
+    # ------------------------------------------------------------------
+    # state — status and version control.
+    # ------------------------------------------------------------------
+
+    $color.state.error:
+      values:
+        theme-dark: $color.palette.red-700
+    $color.state.warning:
+      values:
+        theme-dark: $color.palette.yellow-700
+    $color.state.info:
+      values:
+        theme-dark: $color.palette.blue-700
+    $color.state.success:
+      values:
+        theme-dark: $color.palette.green-700
+    $color.state.added:
+      values:
+        theme-dark: $color.palette.green-700
+    $color.state.modified:
+      description: >-
+        Every surface that marks an edit — gutter, git decoration, tab
+        border — resolves here. The source theme used four different
+        colors for it.
+      values:
+        theme-dark: $color.palette.blue-700
+    $color.state.deleted:
+      values:
+        theme-dark: $color.palette.red-700
+    $color.state.conflict:
+      values:
+        theme-dark: $color.palette.yellow-700
+    $color.state.ignored:
+      values:
+        theme-dark: $color.palette.stone-600
+
+    # diff — fills, not text. The gutter and the diff editor body share one
+    # pair of hues and differ only in how far the alpha is pulled back.
+    $color.diff.added-fill:
+      values:
+        theme-dark: $color.palette.green-700/60
+    $color.diff.added-fill-muted:
+      values:
+        theme-dark: $color.palette.green-700/40
+    $color.diff.added-fill-subtle:
+      values:
+        theme-dark: $color.palette.green-700/20
+    $color.diff.added-word:
+      values:
+        theme-dark: $color.palette.green-700
+    $color.diff.removed-fill:
+      values:
+        theme-dark: $color.palette.red-700/60
+    $color.diff.removed-fill-muted:
+      values:
+        theme-dark: $color.palette.red-700/40
+    $color.diff.removed-fill-subtle:
+      values:
+        theme-dark: $color.palette.red-700/20
+    $color.diff.removed-word:
+      values:
+        theme-dark: $color.palette.red-700
+
+    # ------------------------------------------------------------------
+    # brand — not ours to restyle.
+    # ------------------------------------------------------------------
+
+    $color.brand.claude:
+      values:
+        theme-dark: $color.palette.brand-claude
+    $color.brand.claude-light:
+      values:
+        theme-dark: $color.palette.brand-claude-light
