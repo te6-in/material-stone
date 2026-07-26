@@ -14,6 +14,10 @@ mkdir -p ~/.claude/themes
 cp material-stone-dark.json material-stone-light.json ~/.claude/themes/
 ```
 
+Or, from a checkout of this repo, `bun run link` symlinks them there instead —
+then `bun run build` is the whole update, and Claude Code's watcher picks it up
+without a restart.
+
 Then pick one with `/theme`, or name it in `~/.claude/settings.json`:
 
 ```json

@@ -13,11 +13,17 @@ import type { HexStyle, Mode } from "./tokens";
  * background — so there the same body is written once and rendered three
  * times. VS Code and Claude Code cannot do that, so their variants are separate
  * files, chosen by hand.
+ *
+ * `install` is the directory under $HOME the tool reads its themes from, so
+ * `bun run link` can put the generated file where the tool will find it. VS
+ * Code's is null: it installs from the marketplace, and linking a checkout over
+ * that would only shadow the published extension.
  */
 export const TARGETS = [
   {
     template: "templates/claude-code.dark.json",
     output: "themes/claude-code/material-stone-dark.json",
+    install: ".claude/themes",
     hexStyle: "prefixed",
     ground: "$color.surface.canvas",
     sections: [{ header: null, mode: "theme-dark" }],
@@ -25,6 +31,7 @@ export const TARGETS = [
   {
     template: "templates/claude-code.light.json",
     output: "themes/claude-code/material-stone-light.json",
+    install: ".claude/themes",
     hexStyle: "prefixed",
     ground: "$color.surface.canvas",
     sections: [{ header: null, mode: "theme-light" }],
@@ -32,6 +39,7 @@ export const TARGETS = [
   {
     template: "templates/fish.theme",
     output: "themes/fish/material-stone.theme",
+    install: ".config/fish/themes",
     hexStyle: "bare",
     ground: "$color.surface.canvas",
     sections: [
@@ -46,6 +54,7 @@ export const TARGETS = [
   {
     template: "templates/vscode.dark.json",
     output: "themes/vscode/themes/dark.json",
+    install: null,
     hexStyle: "prefixed",
     ground: null,
     sections: [{ header: null, mode: "theme-dark" }],
@@ -53,6 +62,7 @@ export const TARGETS = [
   {
     template: "templates/vscode.light.json",
     output: "themes/vscode/themes/light.json",
+    install: null,
     hexStyle: "prefixed",
     ground: null,
     sections: [{ header: null, mode: "theme-light" }],
@@ -62,6 +72,7 @@ export const TARGETS = [
   output: string;
   hexStyle: HexStyle;
   ground: string | null;
+  install: string | null;
   sections: ReadonlyArray<{ header: string | null; mode: Mode }>;
 }>;
 

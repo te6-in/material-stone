@@ -14,6 +14,9 @@ cp material-stone.theme ~/.config/fish/themes/
 fish_config theme choose material-stone
 ```
 
+Or, from a checkout of this repo, `bun run link` symlinks the file there
+instead, so `bun run build` is the whole update.
+
 `choose` applies to the current session, so put that line in
 `~/.config/fish/config.fish` to make it stick.
 

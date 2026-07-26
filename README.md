@@ -29,8 +29,19 @@ cannot express alpha get it flattened against a ground they declare.
 ```sh
 bun run build   # regenerate every theme
 bun run check   # fail if a generated file no longer matches its template
+bun run link    # point fish and Claude Code at this checkout
 bun test
 ```
+
+`link` symlinks the generated files into the directories those two read from,
+so a rebuild is the whole update rather than a rebuild and a copy — Claude Code
+watches its themes directory and reloads a running session off it. `unlink`
+removes only the links it made. VS Code is not included: it installs from the
+marketplace, and pointing it here would just shadow the published extension.
+
+If the tool's themes directory is itself a symlink — into a dotfiles repo, say —
+`link` stops and says so rather than writing through it, because the links would
+land in that repo instead of in `$HOME`.
 
 Every tool gets both variants, from one palette between them: a semantic token
 names its palette entry once and that pointer holds in both themes, so only the
