@@ -31,10 +31,7 @@ export function extract(source: string, hexStyle: HexStyle) {
 
   const entries = [...names]
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([hex, name]) => `    ${name}:\n      values:\n        theme-dark: "#${hex}"`);
+    .map(([hex, name]) => `${name}:\n  values:\n    theme-dark: "#${hex}"`);
 
-  return {
-    template,
-    tokens: ["kind: Tokens", "metadata:", "  id: color-asis", "data:", "  collection: color", "  tokens:", ...entries].join("\n"),
-  };
+  return { template, tokens: entries.join("\n") };
 }

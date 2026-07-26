@@ -3,25 +3,19 @@ import { describe, expect, test } from "bun:test";
 import { lintTemplate, lintTokens } from "./lint";
 import { parseTokens } from "./tokens";
 
-function doc(body: string) {
-  return parseTokens(
-    ["kind: Tokens", "metadata:", "  id: color", "data:", "  collection: color", "  tokens:", body].join("\n"),
-  );
-}
-
-const entry = (name: string, dark: string) => `    ${name}:\n      values:\n        theme-dark: ${dark}`;
+const entry = (name: string, dark: string) => `${name}:\n  values:\n    theme-dark: ${dark}`;
 
 const GREEN = entry("$color.palette.green-700", '"#c3e294"');
 const USES_GREEN = entry("$color.state.added", "$color.palette.green-700");
 
 describe("lintTokens", () => {
   test("passes a palette entry with one semantic token pointing at it", () => {
-    expect(lintTokens(doc([GREEN, USES_GREEN].join("\n")), "theme-dark")).toEqual([]);
+    expect(lintTokens(parseTokens([GREEN, USES_GREEN].join("\n")), "theme-dark")).toEqual([]);
   });
 
   test("flags a semantic token that points at another semantic token", () => {
     const problems = lintTokens(
-      doc([GREEN, USES_GREEN, entry("$color.diff.added-word", "$color.state.added")].join("\n")),
+      parseTokens([GREEN, USES_GREEN, entry("$color.diff.added-word", "$color.state.added")].join("\n")),
       "theme-dark",
     );
 
@@ -32,7 +26,7 @@ describe("lintTokens", () => {
 
   test("flags two palette entries holding the same value", () => {
     const problems = lintTokens(
-      doc([GREEN, entry("$color.palette.green-701", '"#c3e294"'), USES_GREEN].join("\n")),
+      parseTokens([GREEN, entry("$color.palette.green-701", '"#c3e294"'), USES_GREEN].join("\n")),
       "theme-dark",
     );
 
@@ -41,21 +35,21 @@ describe("lintTokens", () => {
 
   test("leaves two entries alone when they share a value in one mode and split in another", () => {
     const split = [
-      '    $color.palette.green-701:\n      values:\n        theme-dark: "#c3e294"\n        theme-light: "#4c6b1d"',
-      "    $color.state.success:\n      values:\n        theme-dark: $color.palette.green-701",
+      '$color.palette.green-701:\n  values:\n    theme-dark: "#c3e294"\n    theme-light: "#4c6b1d"',
+      "$color.state.success:\n  values:\n    theme-dark: $color.palette.green-701",
     ].join("\n");
 
-    expect(lintTokens(doc([GREEN, USES_GREEN, split].join("\n")), "theme-dark")).toEqual([]);
+    expect(lintTokens(parseTokens([GREEN, USES_GREEN, split].join("\n")), "theme-dark")).toEqual([]);
   });
 
   test("flags a palette entry nothing points at", () => {
-    const problems = lintTokens(doc(GREEN), "theme-dark");
+    const problems = lintTokens(parseTokens(GREEN), "theme-dark");
 
     expect(problems).toEqual(["$color.palette.green-700 is unreachable from the semantic layer"]);
   });
 
   test("flags a raw value outside the palette layer", () => {
-    const problems = lintTokens(doc([GREEN, USES_GREEN, entry("$color.state.error", '"#e97c82"')].join("\n")), "theme-dark");
+    const problems = lintTokens(parseTokens([GREEN, USES_GREEN, entry("$color.state.error", '"#e97c82"')].join("\n")), "theme-dark");
 
     expect(problems).toContain("$color.state.error holds a raw value; only the palette layer may");
   });

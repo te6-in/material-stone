@@ -8,10 +8,7 @@ export type Token = { description?: string; values: Partial<Record<Mode, string>
 const HEX = /^#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
 
 export function parseTokens(source: string) {
-  const doc = Bun.YAML.parse(source) as { kind?: string; data?: { tokens?: Record<string, Token> } } | null;
-  if (doc?.kind !== "Tokens") throw new Error("not a Tokens document");
-
-  return doc.data?.tokens ?? {};
+  return (Bun.YAML.parse(source) as Record<string, Token> | null) ?? {};
 }
 
 /** "$color.palette.green-700/60" -> ["$color.palette.green-700", 0x60] */
