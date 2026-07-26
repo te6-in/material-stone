@@ -1,0 +1,37 @@
+# name: 'Material Stone Dark'
+
+[dark]
+# preferred_background: 181513
+fish_color_normal E7E5E4
+fish_color_command 8CADF5
+fish_color_keyword C698E3
+fish_color_param E7E5E4
+fish_color_quote C3E294
+fish_color_redirection 92D8F5
+fish_color_end C698E3
+fish_color_comment 8E7C72 --italics
+fish_color_error E97C82
+fish_color_gray 4A4A4A
+fish_color_selection --background=4B423D
+fish_color_search_match --background=6C5E56
+fish_color_history_current E7E5E4 --bold
+fish_color_option F6C977
+fish_color_operator 92D8F5
+fish_color_escape F59C80
+fish_color_autosuggestion 4A4A4A
+fish_color_cancel E97C82
+fish_color_cwd 928076
+fish_color_cwd_root E97C82
+fish_color_user C3E294
+fish_color_host 8CADF5
+fish_color_host_remote F6C977
+fish_color_status E97C82
+fish_color_valid_path --underline=single
+fish_pager_color_progress 4A4A4A
+fish_pager_color_prefix C2BDBA --bold
+fish_pager_color_completion E7E5E4
+fish_pager_color_description 4A4A4A --italics
+fish_pager_color_selected_background --background=302A26
+fish_pager_color_selected_prefix C2BDBA --bold
+fish_pager_color_selected_completion E7E5E4
+fish_pager_color_selected_description E7E5E4 --italics
