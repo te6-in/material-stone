@@ -1,0 +1,24 @@
+name: Material Stone Light
+details: lighter
+background: '${$color.surface.canvas}'
+foreground: '${$color.fg.default}'
+cursor: '${$color.caret.default}'
+terminal_colors:
+  normal:
+    black: '${$color.ansi.black}'
+    red: '${$color.ansi.red}'
+    green: '${$color.ansi.green}'
+    yellow: '${$color.ansi.yellow}'
+    blue: '${$color.ansi.blue}'
+    magenta: '${$color.ansi.magenta}'
+    cyan: '${$color.ansi.cyan}'
+    white: '${$color.ansi.white}'
+  bright:
+    black: '${$color.ansi.bright-black}'
+    red: '${$color.ansi.bright-red}'
+    green: '${$color.ansi.bright-green}'
+    yellow: '${$color.ansi.bright-yellow}'
+    blue: '${$color.ansi.bright-blue}'
+    magenta: '${$color.ansi.bright-magenta}'
+    cyan: '${$color.ansi.bright-cyan}'
+    white: '${$color.ansi.bright-white}'

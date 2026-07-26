@@ -1,0 +1,24 @@
+name: Material Stone Light
+details: lighter
+background: '#e9e6e3'
+foreground: '#1b1918'
+cursor: '#7e6500'
+terminal_colors:
+  normal:
+    black: '#000000'
+    red: '#83161c'
+    green: '#4c6b1d'
+    yellow: '#885b09'
+    blue: '#0a2b73'
+    magenta: '#4a1c67'
+    cyan: '#0a506d'
+    white: '#d9d9d9'
+  bright:
+    black: '#4a4a4a'
+    red: '#790713'
+    green: '#446212'
+    yellow: '#734b01'
+    blue: '#032269'
+    magenta: '#42135e'
+    cyan: '#004863'
+    white: '#ffffff'

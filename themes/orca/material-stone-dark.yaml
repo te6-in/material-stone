@@ -1,0 +1,24 @@
+name: Material Stone Dark
+details: darker
+background: '#181513'
+foreground: '#e7e5e4'
+cursor: '#f6ca1c'
+terminal_colors:
+  normal:
+    black: '#000000'
+    red: '#e97c82'
+    green: '#c3e294'
+    yellow: '#f6c977'
+    blue: '#8cadf5'
+    magenta: '#c698e3'
+    cyan: '#92d8f5'
+    white: '#d9d9d9'
+  bright:
+    black: '#4a4a4a'
+    red: '#eda4a7'
+    green: '#d6e9b7'
+    yellow: '#f6d8a2'
+    blue: '#b7cbf5'
+    magenta: '#d9bdea'
+    cyan: '#bde5f5'
+    white: '#ffffff'

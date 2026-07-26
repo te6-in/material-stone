@@ -15,6 +15,8 @@ describe.each([
   ["themes/claude-code/material-stone-dark.json", "prefixed" as const],
   ["themes/claude-code/material-stone-light.json", "prefixed" as const],
   ["themes/fish/material-stone.theme", "bare" as const],
+  ["themes/orca/material-stone-dark.yaml", "prefixed" as const],
+  ["themes/orca/material-stone-light.yaml", "prefixed" as const],
 ])("%s", (path, hexStyle) => {
   test("survives a round trip through template and tokens", async () => {
     const original = await Bun.file(`${root}/${path}`).text();

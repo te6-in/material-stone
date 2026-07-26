@@ -21,6 +21,15 @@ const PAIRS = [
     ],
   },
   {
+    tool: "Orca",
+    dark: "templates/orca.dark.yaml",
+    light: "templates/orca.light.yaml",
+    labels: [
+      { from: "name: Material Stone Dark", to: "name: Material Stone Light" },
+      { from: "details: darker", to: "details: lighter" },
+    ],
+  },
+  {
     tool: "Claude Code",
     dark: "templates/claude-code.dark.json",
     light: "templates/claude-code.light.json",
