@@ -1,8 +1,11 @@
 import { lstat, mkdir, readlink, rm, symlink } from "node:fs/promises";
+import { resolve } from "node:path";
 
 import { TARGETS } from "./targets";
 
-const ROOT = `${import.meta.dir}/..`;
+// Resolved rather than joined: these paths are written into $HOME as link
+// targets, where a `build/..` in the middle is something a reader has to undo.
+const ROOT = resolve(import.meta.dir, "..");
 const HOME = process.env.HOME ?? "";
 
 const basename = (path: string) => path.slice(path.lastIndexOf("/") + 1);
