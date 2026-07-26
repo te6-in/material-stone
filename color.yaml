@@ -441,10 +441,13 @@ data:
         theme-dark: $color.palette.pure-white/1a
     $color.stroke.focus:
       description: >-
-        Transparent. The theme draws no focus ring and leans on the fill change
-        instead, which is worth revisiting for keyboard users.
+        The ring on whatever the keyboard is pointing at. Same value as the
+        active-tab and focused-cell borders, which is the answer the theme had
+        already settled on everywhere except the focus ring itself, where it
+        was transparent. Kept apart from stroke.emphasis so focus can move
+        without dragging every active marker with it.
       values:
-        theme-dark: $color.palette.pure-white/00
+        theme-dark: $color.palette.stone-900
 
     # ------------------------------------------------------------------
     # syntax — code roles. Named for what the token is, never for the
