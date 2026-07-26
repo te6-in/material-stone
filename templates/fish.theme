@@ -1,0 +1,37 @@
+# name: 'Material Stone Dark'
+
+[dark]
+# preferred_background: ${$color.surface.canvas}
+fish_color_normal ${$color.fg.default}
+fish_color_command ${$color.syntax.function}
+fish_color_keyword ${$color.spectrum.purple}
+fish_color_param ${$color.fg.default}
+fish_color_quote ${$color.syntax.string}
+fish_color_redirection ${$color.spectrum.cyan}
+fish_color_end ${$color.spectrum.purple}
+fish_color_comment ${$color.syntax.comment} --italics
+fish_color_error ${$color.state.error}
+fish_color_gray ${$color.ansi.bright-black}
+fish_color_selection --background=${$color.surface.selected}
+fish_color_search_match --background=${$color.surface.match}
+fish_color_history_current ${$color.fg.default} --bold
+fish_color_option ${$color.spectrum.yellow}
+fish_color_operator ${$color.spectrum.cyan}
+fish_color_escape ${$color.syntax.escape}
+fish_color_autosuggestion ${$color.ansi.bright-black}
+fish_color_cancel ${$color.state.error}
+fish_color_cwd ${$color.fg.muted}
+fish_color_cwd_root ${$color.state.error}
+fish_color_user ${$color.spectrum.green}
+fish_color_host ${$color.spectrum.blue}
+fish_color_host_remote ${$color.spectrum.yellow}
+fish_color_status ${$color.state.error}
+fish_color_valid_path --underline=single
+fish_pager_color_progress ${$color.ansi.bright-black}
+fish_pager_color_prefix ${$color.fg.emphasis} --bold
+fish_pager_color_completion ${$color.fg.default}
+fish_pager_color_description ${$color.ansi.bright-black} --italics
+fish_pager_color_selected_background --background=${$color.surface.input}
+fish_pager_color_selected_prefix ${$color.fg.emphasis} --bold
+fish_pager_color_selected_completion ${$color.fg.default}
+fish_pager_color_selected_description ${$color.fg.default} --italics

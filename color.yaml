@@ -331,6 +331,46 @@ data:
       values:
         theme-dark: $color.palette.stone-500
 
+    # Washes. Black and white at low alpha, laid over whatever ground the
+    # element happens to sit on, so one value reads correctly on the canvas and
+    # on a menu. They pick up the warmth of what is underneath instead of
+    # carrying their own.
+    $color.surface.transparent:
+      description: Nothing drawn. Turns an element's fill or border off.
+      values:
+        theme-dark: $color.palette.pure-black/00
+    $color.surface.hover:
+      values:
+        theme-dark: $color.palette.pure-white/0a
+    $color.surface.active:
+      description: A row that is chosen and stays chosen.
+      values:
+        theme-dark: $color.palette.pure-white/10
+    $color.surface.pressed:
+      description: The row under the pointer in a menu or a suggestion list.
+      values:
+        theme-dark: $color.palette.pure-black/50
+    $color.surface.sunken:
+      description: Recesses into its ground rather than rising off it.
+      values:
+        theme-dark: $color.palette.pure-black/30
+    $color.surface.hover-muted:
+      description: Hover on the status bar, which is too dark for the white wash to show.
+      values:
+        theme-dark: $color.palette.pure-dim/20
+    $color.surface.void:
+      description: Solid black. The one place the theme goes all the way down.
+      values:
+        theme-dark: $color.palette.pure-black
+
+    $color.overlay.shadow:
+      values:
+        theme-dark: $color.palette.pure-black/30
+    $color.overlay.strong:
+      description: Selected text outside the editor, where the wash carries the whole signal.
+      values:
+        theme-dark: $color.palette.pure-black/80
+
     # ------------------------------------------------------------------
     # fg — foreground weights, strongest first.
     # ------------------------------------------------------------------
@@ -359,6 +399,23 @@ data:
       description: Text sitting on a light or accent fill.
       values:
         theme-dark: $color.palette.stone-00
+    $color.fg.on-accent:
+      description: >-
+        Text and icons on a bright fill. Says the same thing as fg.inverted but
+        lands on pure black instead of the darkest stone; the two should merge
+        once it is clear which one is right.
+      values:
+        theme-dark: $color.palette.pure-black
+    $color.fg.on-dark:
+      description: The brightest foreground, for the few places that want white and not the warm text color.
+      values:
+        theme-dark: $color.palette.pure-white
+    $color.fg.on-badge:
+      description: >-
+        Badge counts. Nearly invisible against the badge fill it sits on, which
+        is a contrast problem the palette inherited rather than caused.
+      values:
+        theme-dark: $color.palette.pure-dim
 
     $color.stroke.default:
       values:
@@ -366,6 +423,28 @@ data:
     $color.stroke.emphasis:
       values:
         theme-dark: $color.palette.stone-900
+    $color.stroke.emphasis-muted:
+      description: The active marker on a group that does not have focus.
+      values:
+        theme-dark: $color.palette.pure-dim
+    $color.stroke.hairline:
+      description: The thinnest edge that still separates two surfaces.
+      values:
+        theme-dark: $color.palette.pure-white/10
+    $color.stroke.sunken:
+      description: An edge cut into its ground instead of raised off it.
+      values:
+        theme-dark: $color.palette.pure-black/30
+    $color.stroke.group:
+      description: Divider between groups inside a picker.
+      values:
+        theme-dark: $color.palette.pure-white/1a
+    $color.stroke.focus:
+      description: >-
+        Transparent. The theme draws no focus ring and leans on the fill change
+        instead, which is worth revisiting for keyboard users.
+      values:
+        theme-dark: $color.palette.pure-white/00
 
     # ------------------------------------------------------------------
     # syntax — code roles. Named for what the token is, never for the
@@ -472,6 +551,21 @@ data:
     $color.highlight.find-range:
       values:
         theme-dark: $color.palette.yellow-700
+    $color.highlight.find-match:
+      description: The one hit the cursor is on, filled solid and outlined.
+      values:
+        theme-dark: $color.palette.pure-black
+    $color.highlight.find-match-other:
+      description: The other hits, dimmer so the current one stays findable.
+      values:
+        theme-dark: $color.palette.pure-black/50
+    $color.highlight.find-match-edge:
+      values:
+        theme-dark: $color.palette.pure-white/50
+    $color.highlight.range:
+      description: A block of lines the editor is drawing attention to.
+      values:
+        theme-dark: $color.palette.pure-white/0d
 
     # ------------------------------------------------------------------
     # state — status and version control.

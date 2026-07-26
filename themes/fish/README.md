@@ -2,7 +2,8 @@
 
 A warm, high-contrast palette for [fish](https://fishshell.com/).
 
-Dark only for now. Every color is a value taken from [the Visual Studio Code theme](../vscode/themes/dark.json), which is the source of truth for the palette.
+Dark only for now. This file is generated from [`color.yaml`](../../color.yaml) and
+[its template](../../templates); edit those, not this, and run `bun run build`.
 
 ## Installation
 

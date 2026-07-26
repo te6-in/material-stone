@@ -1,0 +1,87 @@
+{
+  "name": "material-stone-dark",
+  "base": "dark",
+  "overrides": {
+    "text": "${$color.fg.default}",
+    "inverseText": "${$color.fg.inverted}",
+    "inactive": "${$color.fg.muted}",
+    "inactiveShimmer": "${$color.fg.subtle}",
+    "subtle": "${$color.fg.dim}",
+    "promptBorder": "${$color.fg.muted}",
+    "promptBorderShimmer": "${$color.fg.subtle}",
+
+    "success": "${$color.state.success}",
+    "error": "${$color.state.error}",
+    "warning": "${$color.state.warning}",
+    "warningShimmer": "${$color.spectrum.yellow-light}",
+    "merged": "${$color.spectrum.purple}",
+
+    "diffAdded": "${$color.diff.added-fill}",
+    "diffAddedDimmed": "${$color.diff.added-fill-muted}",
+    "diffAddedWord": "${$color.diff.added-word}",
+    "diffRemoved": "${$color.diff.removed-fill}",
+    "diffRemovedDimmed": "${$color.diff.removed-fill-muted}",
+    "diffRemovedWord": "${$color.diff.removed-word}",
+
+    "autoAccept": "${$color.spectrum.purple}",
+    "bashBorder": "${$color.spectrum.purple}",
+
+    "claude": "${$color.brand.claude}",
+    "claudeShimmer": "${$color.brand.claude-light}",
+    "claudeBlue_FOR_SYSTEM_SPINNER": "${$color.spectrum.blue}",
+    "claudeBlueShimmer_FOR_SYSTEM_SPINNER": "${$color.spectrum.blue-light}",
+    "clawd_body": "${$color.brand.claude}",
+    "clawd_background": "${$color.surface.void}",
+
+    "briefLabelYou": "${$color.spectrum.green}",
+    "briefLabelClaude": "${$color.brand.claude}",
+
+    "permission": "${$color.spectrum.green}",
+    "permissionShimmer": "${$color.spectrum.green-light}",
+    "suggestion": "${$color.spectrum.green}",
+    "remember": "${$color.spectrum.green}",
+    "planMode": "${$color.spectrum.cyan}",
+
+    "ide": "${$color.spectrum.green}",
+    "professionalBlue": "${$color.spectrum.blue}",
+    "chromeYellow": "${$color.spectrum.yellow}",
+    "background": "${$color.spectrum.cyan}",
+
+    "userMessageBackground": "${$color.surface.input}",
+    "userMessageBackgroundHover": "${$color.surface.selected}",
+    "messageActionsBackground": "${$color.surface.raised}",
+    "selectionBg": "${$color.surface.selected}",
+    "bashMessageBackgroundColor": "${$color.surface.input}",
+    "memoryBackgroundColor": "${$color.surface.selected}",
+
+    "rate_limit_fill": "${$color.spectrum.green}",
+    "rate_limit_empty": "${$color.surface.input}",
+
+    "fastMode": "${$color.spectrum.orange}",
+    "fastModeShimmer": "${$color.spectrum.orange-light}",
+
+    "red_FOR_SUBAGENTS_ONLY": "${$color.spectrum.red}",
+    "orange_FOR_SUBAGENTS_ONLY": "${$color.spectrum.orange}",
+    "yellow_FOR_SUBAGENTS_ONLY": "${$color.spectrum.yellow}",
+    "green_FOR_SUBAGENTS_ONLY": "${$color.spectrum.green}",
+    "blue_FOR_SUBAGENTS_ONLY": "${$color.spectrum.blue}",
+    "purple_FOR_SUBAGENTS_ONLY": "${$color.spectrum.purple}",
+    "pink_FOR_SUBAGENTS_ONLY": "${$color.spectrum.pink}",
+    "cyan_FOR_SUBAGENTS_ONLY": "${$color.spectrum.cyan}",
+
+    "rainbow_red": "${$color.spectrum.red}",
+    "rainbow_orange": "${$color.spectrum.orange}",
+    "rainbow_yellow": "${$color.spectrum.yellow}",
+    "rainbow_green": "${$color.spectrum.green}",
+    "rainbow_blue": "${$color.spectrum.blue}",
+    "rainbow_indigo": "${$color.spectrum.indigo}",
+    "rainbow_violet": "${$color.spectrum.purple}",
+    "rainbow_red_shimmer": "${$color.spectrum.red-light}",
+    "rainbow_orange_shimmer": "${$color.spectrum.orange-light}",
+    "rainbow_yellow_shimmer": "${$color.spectrum.yellow-light}",
+    "rainbow_green_shimmer": "${$color.spectrum.green-light}",
+    "rainbow_blue_shimmer": "${$color.spectrum.blue-light}",
+    "rainbow_indigo_shimmer": "${$color.spectrum.indigo-light}",
+    "rainbow_violet_shimmer": "${$color.spectrum.purple-light}"
+  }
+}
