@@ -16,17 +16,25 @@ const signature = (token: Token) =>
 
 /**
  * The rules the palette has to keep to stay worth having: one entry per idea,
- * every hex in the palette layer, every palette entry earning its place, and
- * no semantic token leaning on another semantic token — a contract must not
- * move because a styling choice did.
+ * every hex in the palette layer, and no semantic token leaning on another
+ * semantic token — a contract must not move because a styling choice did.
  *
  * Two entries count as the same idea only when they agree in every mode. A pair
  * that shares a hex in one theme and splits in another is two ideas that happen
  * to collide once, which is the normal shape of a role the dark theme merged
  * and the light theme keeps apart.
+ *
+ * An entry nothing points at comes back as a warning rather than a problem. It
+ * used to be a problem, on the reasoning that every entry should earn its place,
+ * and that reasoning does not survive a palette where a family fills every rung
+ * whether or not a role wants that weight yet: the ramps are complete so a role
+ * can pick a lightness without a palette edit, and about half of them are
+ * waiting rather than wasted. Still worth counting — waiting and forgotten look
+ * identical from here, and only the count tells you which way it is trending.
  */
 export function lintTokens(tokens: Tokens, mode: Mode) {
   const problems: string[] = [];
+  const warnings: string[] = [];
   const declaredBy = new Map<string, { hex: string; names: string[] }>();
   const referenced = new Set<string>();
 
@@ -59,10 +67,10 @@ export function lintTokens(tokens: Tokens, mode: Mode) {
 
   for (const name of Object.keys(tokens)) {
     if (name.startsWith(PALETTE) && !referenced.has(name))
-      problems.push(`${name} is unreachable from the semantic layer`);
+      warnings.push(`${name} is unreachable from the semantic layer`);
   }
 
-  return problems;
+  return { problems, warnings };
 }
 
 /**

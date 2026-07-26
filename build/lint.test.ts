@@ -12,11 +12,14 @@ const USES_GREEN = entry("$color.state.added", "$color.palette.green-700");
 
 describe("lintTokens", () => {
   test("passes a palette entry with one semantic token pointing at it", () => {
-    expect(lintTokens(parseTokens([GREEN, USES_GREEN].join("\n")), "theme-dark")).toEqual([]);
+    expect(lintTokens(parseTokens([GREEN, USES_GREEN].join("\n")), "theme-dark")).toEqual({
+      problems: [],
+      warnings: [],
+    });
   });
 
   test("flags a semantic token that points at another semantic token", () => {
-    const problems = lintTokens(
+    const { problems } = lintTokens(
       parseTokens([GREEN, USES_GREEN, entry("$color.diff.added-word", "$color.state.added")].join("\n")),
       "theme-dark",
     );
@@ -27,7 +30,7 @@ describe("lintTokens", () => {
   });
 
   test("flags two palette entries holding the same value", () => {
-    const problems = lintTokens(
+    const { problems } = lintTokens(
       parseTokens([GREEN, entry("$color.palette.green-701", '"#c3e294"'), USES_GREEN].join("\n")),
       "theme-dark",
     );
@@ -41,17 +44,21 @@ describe("lintTokens", () => {
       entry("$color.state.success", "$color.palette.green-701"),
     ].join("\n");
 
-    expect(lintTokens(parseTokens([GREEN, USES_GREEN, split].join("\n")), "theme-dark")).toEqual([]);
+    expect(lintTokens(parseTokens([GREEN, USES_GREEN, split].join("\n")), "theme-dark").problems).toEqual([]);
   });
 
-  test("flags a palette entry nothing points at", () => {
-    const problems = lintTokens(parseTokens(GREEN), "theme-dark");
+  // A warning and not a problem: a complete ramp holds rungs no role has asked
+  // for yet, and the build has no way to tell those from the ones a rename left
+  // behind. Counting them is the most it can honestly do.
+  test("warns about a palette entry nothing points at", () => {
+    const { problems, warnings } = lintTokens(parseTokens(GREEN), "theme-dark");
 
-    expect(problems).toEqual(["$color.palette.green-700 is unreachable from the semantic layer"]);
+    expect(problems).toEqual([]);
+    expect(warnings).toEqual(["$color.palette.green-700 is unreachable from the semantic layer"]);
   });
 
   test("flags a raw value outside the palette layer", () => {
-    const problems = lintTokens(parseTokens([GREEN, USES_GREEN, entry("$color.state.error", '"#e97c82"')].join("\n")), "theme-dark");
+    const { problems } = lintTokens(parseTokens([GREEN, USES_GREEN, entry("$color.state.error", '"#e97c82"')].join("\n")), "theme-dark");
 
     expect(problems).toContain("$color.state.error holds a raw value; only the palette layer may");
   });
@@ -59,7 +66,7 @@ describe("lintTokens", () => {
   test.each(["theme-dark", "theme-light"] as const)("passes the real token file in %s", async (mode) => {
     const tokens = parseTokens(await Bun.file(`${import.meta.dir}/../color.yaml`).text());
 
-    expect(lintTokens(tokens, mode)).toEqual([]);
+    expect(lintTokens(tokens, mode).problems).toEqual([]);
   });
 });
 
