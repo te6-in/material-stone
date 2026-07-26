@@ -5,16 +5,28 @@
 # points at a palette entry and never at another semantic token.
 #
 # Role groups stay independent even where they land on the same value
-# today. `ansi.red` and `state.error` are both red-700 right now, but
-# one is a contract with every program the user runs and the other is
-# a styling choice — chaining them would make a UI decision silently
-# rewrite the terminal.
+# today. `ansi.red` and `state.error` both resolve to red-900 right
+# now, but one is a contract with every program the user runs and the
+# other is a styling choice — chaining them would make a UI decision
+# silently rewrite the terminal.
 #
-# The palette scale number is ordinal, not a measurement: it counts
-# distance from the background, so a light theme fills the same slot
-# numbers with its own values and every token below keeps working.
-# Slots are sparse on purpose — a missing number means no value lives
-# there yet, not that the ramp is broken.
+# The scale number is a lightness and nothing else. `red-900` and
+# `green-900` are the same weight, so a role can move between families
+# without moving up or down, and a light theme can fill the same
+# numbers with its own values and leave every token below untouched.
+#
+# stone is where the ladder is written down. Every chromatic family
+# stands on stone's rungs, which is why the numbers are not evenly
+# spaced and should not be: the spacing is tight near the ground where
+# the surfaces stack, tight again through the text weights, and wide
+# across the middle this theme barely uses. `build/ramp.ts` derives
+# every chromatic value from the rung and the family, and
+# `build/ramp.test.ts` checks that the file still says so.
+#
+# The ramps are complete rather than sparse. About half the rungs have
+# no role pointing at them, which the build reports as a count rather
+# than an error: a role that wants a weight should find it already
+# there instead of needing a palette edit first.
 #
 # Every token writes both modes. Most of the semantic layer names the
 # same entry twice, because which entry a role points at is a decision
@@ -24,19 +36,19 @@
 # schema turns the omission into an error, so a role that wants a
 # different entry under one theme is the only thing a difference means.
 #
-# Two neighbouring slots holding the same hex in one theme and different
-# hexes in the other is the normal shape, not a mistake: it is a pair of
-# roles one theme merged and the other keeps apart, and the slot is what
-# stops the merge from being read as an equivalence.
-#
 # A `/xx` suffix on a reference applies alpha, hex pair, same notation
 # the VS Code theme uses. Tools that cannot express alpha flatten it
 # against the ground they declare.
 # ------------------------------------------------------------------
 
-# stone — the warm neutral ramp. Hue holds at 55-64 the whole way up in
-# the dark theme and 43-68 in the light one, and both run in the same
+# stone — the warm neutral ramp, and the ladder every other family stands on.
+# Hue holds at 43-68 the whole way up in both themes, and both run in the same
 # direction: away from their own ground, one lightening and one darkening.
+#
+# The two ends belong to stone alone. `00` is the ground the theme is drawn on,
+# and `1000` is the far extreme the strongest foreground reaches for; a family
+# at the ground would be the ground, and one at the extreme has no chroma left
+# to carry.
 $color.palette.stone-00:
   values:
     theme-dark: "#181513"
@@ -52,31 +64,39 @@ $color.palette.stone-200:
 $color.palette.stone-300:
   values:
     theme-dark: "#302a26"
-    theme-light: "#d2cbc6"
+    theme-light: "#d3cbc6"
 $color.palette.stone-400:
   values:
     theme-dark: "#49403b"
-    theme-light: "#bbb1ac"
+    theme-light: "#bbb1ab"
 $color.palette.stone-500:
   values:
     theme-dark: "#6c5e56"
     theme-light: "#a2938a"
 $color.palette.stone-600:
   values:
-    theme-dark: "#928076"
-    theme-light: "#807066"
+    theme-dark: "#918076"
+    theme-light: "#89786e"
 $color.palette.stone-700:
   values:
-    theme-dark: "#9e948d"
-    theme-light: "#726861"
+    theme-dark: "#a2938a"
+    theme-light: "#71635b"
 $color.palette.stone-800:
   values:
     theme-dark: "#a99b93"
-    theme-light: "#63574f"
+    theme-light: "#5a4e47"
 $color.palette.stone-900:
   values:
     theme-dark: "#c2bdba"
-    theme-light: "#3d3836"
+    theme-light: "#413c3a"
+$color.palette.stone-950:
+  description: >-
+    Halves the widest step in the ramp, which is also the one carrying the most
+    weight: nearly half of every colour a target asks for resolves to 900 or
+    1000, and there was nothing between them.
+  values:
+    theme-dark: "#d4d1cf"
+    theme-light: "#2d2a28"
 $color.palette.stone-1000:
   values:
     theme-dark: "#e7e5e4"
@@ -129,163 +149,408 @@ $color.palette.ink-faint:
     theme-dark: "#4a4a4a"
     theme-light: "#adadad"
 
-# red — 600 and 700 are one value in the dark theme. The light theme
-# writes markup a step nearer its ground than it writes a failure.
+# ------------------------------------------------------------------
+# The chromatic families. Nine hues, ten rungs each, all of it derived:
+# the rung fixes the lightness, the family fixes the hue and the chroma,
+# and `build/ramp.ts` holds the two numbers per family that decide the
+# rest. Editing a hex here without editing that file is a test failure,
+# which is the point — the values are an output, not a decision.
+#
+# A ramp rises, plateaus, then falls away again. The plateau is the
+# family's chroma; the ends are the sRGB cube closing in, where no value
+# that saturated exists at that lightness.
+# ------------------------------------------------------------------
+
+# red — the warmest of the cool half, and the only family whose chroma runs
+# above the rest. Failure, deletion and markup all live here.
+$color.palette.red-100:
+  values:
+    theme-dark: "#360409"
+    theme-light: "#fcd1d0"
+$color.palette.red-200:
+  values:
+    theme-dark: "#43060d"
+    theme-light: "#fbc8c6"
+$color.palette.red-300:
+  values:
+    theme-dark: "#540913"
+    theme-light: "#fabab8"
+$color.palette.red-400:
+  values:
+    theme-dark: "#7a1420"
+    theme-light: "#f89291"
+$color.palette.red-500:
+  values:
+    theme-dark: "#a03a3f"
+    theme-light: "#dd7172"
 $color.palette.red-600:
   values:
-    theme-dark: "#e97c82"
-    theme-light: "#93252a"
+    theme-dark: "#c85e60"
+    theme-light: "#bf5658"
 $color.palette.red-700:
   values:
-    theme-dark: "#e97c82"
-    theme-light: "#83161c"
+    theme-dark: "#dd7172"
+    theme-light: "#a63f43"
 $color.palette.red-800:
-  description: Hue runs 11 degrees warmer than red-700, toward orange.
   values:
-    theme-dark: "#ff8f82"
-    theme-light: "#9e0811"
+    theme-dark: "#e67979"
+    theme-light: "#8c272f"
 $color.palette.red-900:
   values:
-    theme-dark: "#eda4a7"
-    theme-light: "#790713"
-
-# pink — one step only. No lighter value exists yet.
-$color.palette.pink-700:
+    theme-dark: "#f9a4a2"
+    theme-light: "#72101d"
+$color.palette.red-950:
   values:
-    theme-dark: "#f6a1ae"
-    theme-light: "#791b28"
+    theme-dark: "#fbc1bf"
+    theme-light: "#530912"
 
-# orange
+# orange — sits close enough to red that the two only stay apart because
+# nothing asks them to appear side by side at the same weight.
+$color.palette.orange-100:
+  values:
+    theme-dark: "#300e02"
+    theme-light: "#fcd3c4"
+$color.palette.orange-200:
+  values:
+    theme-dark: "#3b1304"
+    theme-light: "#fbcab8"
+$color.palette.orange-300:
+  values:
+    theme-dark: "#4b1a06"
+    theme-light: "#fabca6"
+$color.palette.orange-400:
+  values:
+    theme-dark: "#6e2a0c"
+    theme-light: "#f19a79"
 $color.palette.orange-500:
   values:
-    theme-dark: "#cf845a"
-    theme-light: "#9a7c6a"
+    theme-dark: "#964728"
+    theme-light: "#d27d5d"
+$color.palette.orange-600:
+  values:
+    theme-dark: "#bd6a4b"
+    theme-light: "#b46243"
 $color.palette.orange-700:
   values:
-    theme-dark: "#f59c80"
-    theme-light: "#983c1f"
+    theme-dark: "#d27d5d"
+    theme-light: "#9c4c2e"
+$color.palette.orange-800:
+  values:
+    theme-dark: "#da8565"
+    theme-light: "#833616"
 $color.palette.orange-900:
   values:
-    theme-dark: "#ffb38b"
-    theme-light: "#934219"
+    theme-dark: "#f9a789"
+    theme-light: "#67260b"
+$color.palette.orange-950:
+  values:
+    theme-dark: "#fbc3af"
+    theme-light: "#4a1905"
 
-# yellow — 500 and 700 are one value in the dark theme.
+# yellow — carries the caret and the matched bracket as well as warnings,
+# which is more than one hue should have to do. It inherited the job when gold
+# folded in: gold was this hue at half again the chroma, and a family is one
+# hue and one chroma, so there was nowhere to keep it.
+$color.palette.yellow-100:
+  values:
+    theme-dark: "#241702"
+    theme-light: "#fcd79f"
+$color.palette.yellow-200:
+  values:
+    theme-dark: "#2d1e04"
+    theme-light: "#fbcf89"
+$color.palette.yellow-300:
+  values:
+    theme-dark: "#3a2706"
+    theme-light: "#f4c477"
+$color.palette.yellow-400:
+  values:
+    theme-dark: "#573d0d"
+    theme-light: "#daaa5e"
 $color.palette.yellow-500:
   values:
-    theme-dark: "#f6c977"
-    theme-light: "#9b6e19"
+    theme-dark: "#7e5a17"
+    theme-light: "#bb8d3f"
 $color.palette.yellow-600:
   values:
-    theme-dark: "#edc68e"
-    theme-light: "#78561d"
+    theme-dark: "#a87b2a"
+    theme-light: "#9f7320"
 $color.palette.yellow-700:
   values:
-    theme-dark: "#f6c977"
-    theme-light: "#885b09"
+    theme-dark: "#bb8d3f"
+    theme-light: "#845e19"
+$color.palette.yellow-800:
+  values:
+    theme-dark: "#c49548"
+    theme-light: "#694a12"
 $color.palette.yellow-900:
   values:
-    theme-dark: "#f6d8a2"
-    theme-light: "#734b01"
-
-# gold — chroma 80, the most saturated value in the palette. Kept out
-# of the yellow ramp because it is a signal color, not a text color.
-# One value in the dark theme; the light theme keeps the fill far nearer
-# its ground than the strokes, which is why the two slots exist.
-$color.palette.gold-500:
+    theme-dark: "#e5b569"
+    theme-light: "#51380b"
+$color.palette.yellow-950:
   values:
-    theme-dark: "#f6ca1c"
-    theme-light: "#e3b709"
-$color.palette.gold-700:
-  values:
-    theme-dark: "#f6ca1c"
-    theme-light: "#7e6500"
+    theme-dark: "#fac97c"
+    theme-light: "#392706"
 
-# green — 500, 600 and 700 are one value in the dark theme.
+# green — the widest gamut of any family in the dark theme and the narrowest
+# in the light one, which is why its ramp plateaus early going up and late
+# coming down.
+$color.palette.green-100:
+  values:
+    theme-dark: "#141e03"
+    theme-light: "#caeb9e"
+$color.palette.green-200:
+  values:
+    theme-dark: "#1a2604"
+    theme-light: "#c4e498"
+$color.palette.green-300:
+  values:
+    theme-dark: "#223106"
+    theme-light: "#bada8e"
+$color.palette.green-400:
+  values:
+    theme-dark: "#354a0d"
+    theme-light: "#a1c076"
 $color.palette.green-500:
   values:
-    theme-dark: "#c3e294"
-    theme-light: "#627f2f"
+    theme-dark: "#516c22"
+    theme-light: "#85a259"
 $color.palette.green-600:
   values:
-    theme-dark: "#c3e294"
-    theme-light: "#547225"
+    theme-dark: "#738f47"
+    theme-light: "#6b873f"
 $color.palette.green-700:
   values:
-    theme-dark: "#c3e294"
-    theme-light: "#4c6b1d"
+    theme-dark: "#85a259"
+    theme-light: "#567128"
+$color.palette.green-800:
+  values:
+    theme-dark: "#8daa61"
+    theme-light: "#425a12"
 $color.palette.green-900:
   values:
-    theme-dark: "#d6e9b7"
-    theme-light: "#446212"
+    theme-dark: "#accb80"
+    theme-light: "#31450c"
+$color.palette.green-950:
+  values:
+    theme-dark: "#bfdf93"
+    theme-light: "#223006"
 
-# cyan — six steps across two hue bands: 400-700 sit near 245, 800-900
-# near 233. Worth collapsing later; kept apart for now.
+# cyan — one hue now. The source theme spread six entries across two hue bands
+# 29 degrees apart and told them apart by chroma as much as by lightness; the
+# grid has no room for that, so the roles are separated by rung instead.
+$color.palette.cyan-100:
+  values:
+    theme-dark: "#031e23"
+    theme-light: "#9aedfc"
+$color.palette.cyan-200:
+  values:
+    theme-dark: "#05262b"
+    theme-light: "#8ce7f7"
+$color.palette.cyan-300:
+  values:
+    theme-dark: "#073138"
+    theme-light: "#82dded"
 $color.palette.cyan-400:
   values:
-    theme-dark: "#79bce0"
-    theme-light: "#325f77"
+    theme-dark: "#104a53"
+    theme-light: "#68c3d3"
 $color.palette.cyan-500:
   values:
-    theme-dark: "#88d1ff"
-    theme-light: "#0d5da4"
+    theme-dark: "#1b6d79"
+    theme-light: "#48a5b5"
 $color.palette.cyan-600:
   values:
-    theme-dark: "#a7d2e5"
-    theme-light: "#42575f"
+    theme-dark: "#3292a2"
+    theme-light: "#288a99"
 $color.palette.cyan-700:
   values:
-    theme-dark: "#9ed5f6"
-    theme-light: "#2e6380"
+    theme-dark: "#48a5b5"
+    theme-light: "#1d727f"
 $color.palette.cyan-800:
   values:
-    theme-dark: "#92d8f5"
-    theme-light: "#0a506d"
+    theme-dark: "#51aebd"
+    theme-light: "#155b65"
 $color.palette.cyan-900:
   values:
-    theme-dark: "#bde5f5"
-    theme-light: "#004863"
+    theme-dark: "#73cede"
+    theme-light: "#0e454d"
+$color.palette.cyan-950:
+  values:
+    theme-dark: "#87e2f2"
+    theme-light: "#073137"
 
-# blue — 600 and 700 are one value in the dark theme.
+# blue
+$color.palette.blue-100:
+  values:
+    theme-dark: "#01104d"
+    theme-light: "#cedefc"
+$color.palette.blue-200:
+  values:
+    theme-dark: "#041957"
+    theme-light: "#c5d7fb"
+$color.palette.blue-300:
+  values:
+    theme-dark: "#0c2563"
+    theme-light: "#b7cdfa"
+$color.palette.blue-400:
+  values:
+    theme-dark: "#213e7e"
+    theme-light: "#91b3f8"
+$color.palette.blue-500:
+  values:
+    theme-dark: "#3f5ea2"
+    theme-light: "#7295dd"
 $color.palette.blue-600:
   values:
-    theme-dark: "#8cadf5"
-    theme-light: "#1d3f89"
+    theme-dark: "#6082c9"
+    theme-light: "#597ac0"
 $color.palette.blue-700:
   values:
-    theme-dark: "#8cadf5"
-    theme-light: "#0a2b73"
+    theme-dark: "#7295dd"
+    theme-light: "#4463a8"
+$color.palette.blue-800:
+  values:
+    theme-dark: "#7a9de6"
+    theme-light: "#2f4d8f"
 $color.palette.blue-900:
   values:
-    theme-dark: "#b7cbf5"
-    theme-light: "#032269"
+    theme-dark: "#a1bef9"
+    theme-light: "#1d3879"
+$color.palette.blue-950:
+  values:
+    theme-dark: "#bed2fb"
+    theme-light: "#0b2463"
 
-# indigo
+# indigo — 19 degrees from purple, the tightest pair in the palette. They stay
+# apart on the strength of that gap alone, which is worth watching.
+$color.palette.indigo-100:
+  values:
+    theme-dark: "#1e0547"
+    theme-light: "#ddd8fc"
+$color.palette.indigo-200:
+  values:
+    theme-dark: "#250d52"
+    theme-light: "#d6d0fb"
+$color.palette.indigo-300:
+  values:
+    theme-dark: "#2f1a5e"
+    theme-light: "#cdc5fa"
+$color.palette.indigo-400:
+  values:
+    theme-dark: "#453379"
+    theme-light: "#b5a6f7"
+$color.palette.indigo-500:
+  values:
+    theme-dark: "#64539c"
+    theme-light: "#9889d7"
+$color.palette.indigo-600:
+  values:
+    theme-dark: "#8676c3"
+    theme-light: "#7e6eba"
 $color.palette.indigo-700:
   values:
-    theme-dark: "#b9a5f1"
-    theme-light: "#493687"
-$color.palette.indigo-900:
-  description: >-
-    Generated, not extracted. The source theme had no light indigo, so
-    this applies the red/blue/purple 700-to-900 step (L* +10.5,
-    C* -17.1) to indigo-700 at a fixed hue.
+    theme-dark: "#9889d7"
+    theme-light: "#6858a2"
+$color.palette.indigo-800:
   values:
-    theme-dark: "#d4c6f4"
-    theme-light: "#412c7d"
+    theme-dark: "#a090e0"
+    theme-light: "#53428a"
+$color.palette.indigo-900:
+  values:
+    theme-dark: "#bfb3f9"
+    theme-light: "#402e73"
+$color.palette.indigo-950:
+  values:
+    theme-dark: "#d2cbfb"
+    theme-light: "#2e195d"
 
-# purple — 600 and 700 are one value in the dark theme.
+# purple — ANSI magenta answers here, so the hue is a terminal contract as much
+# as a styling choice.
+$color.palette.purple-100:
+  values:
+    theme-dark: "#28043a"
+    theme-light: "#ead2fc"
+$color.palette.purple-200:
+  values:
+    theme-dark: "#320647"
+    theme-light: "#e6c9fb"
+$color.palette.purple-300:
+  values:
+    theme-dark: "#3d1354"
+    theme-light: "#e0bcfa"
+$color.palette.purple-400:
+  values:
+    theme-dark: "#552c6e"
+    theme-light: "#cb9ee9"
+$color.palette.purple-500:
+  values:
+    theme-dark: "#764c91"
+    theme-light: "#ad81ca"
 $color.palette.purple-600:
   values:
-    theme-dark: "#c698e3"
-    theme-light: "#5d2e7a"
+    theme-dark: "#9a6fb7"
+    theme-light: "#9267ae"
 $color.palette.purple-700:
   values:
-    theme-dark: "#c698e3"
-    theme-light: "#4a1c67"
+    theme-dark: "#ad81ca"
+    theme-light: "#7b5196"
+$color.palette.purple-800:
+  values:
+    theme-dark: "#b589d3"
+    theme-light: "#653b7f"
 $color.palette.purple-900:
   values:
-    theme-dark: "#d9bdea"
-    theme-light: "#42135e"
+    theme-dark: "#d6a9f5"
+    theme-light: "#502769"
+$color.palette.purple-950:
+  values:
+    theme-dark: "#e3c3fb"
+    theme-light: "#3d1253"
+
+# rose — was pink, sitting 8 degrees off red where no eye could separate the
+# two once each family had to hold a single hue. Moved into the 70-degree gap
+# between purple and red, where it can be told apart from both.
+$color.palette.rose-100:
+  values:
+    theme-dark: "#320422"
+    theme-light: "#fccee6"
+$color.palette.rose-200:
+  values:
+    theme-dark: "#3e052a"
+    theme-light: "#fbc4e1"
+$color.palette.rose-300:
+  values:
+    theme-dark: "#4e0937"
+    theme-light: "#fab4da"
+$color.palette.rose-400:
+  values:
+    theme-dark: "#6a224f"
+    theme-light: "#e895c3"
+$color.palette.rose-500:
+  values:
+    theme-dark: "#8e436f"
+    theme-light: "#c978a5"
+$color.palette.rose-600:
+  values:
+    theme-dark: "#b56692"
+    theme-light: "#ac5e8a"
+$color.palette.rose-700:
+  values:
+    theme-dark: "#c978a5"
+    theme-light: "#944874"
+$color.palette.rose-800:
+  values:
+    theme-dark: "#d180ad"
+    theme-light: "#7b325e"
+$color.palette.rose-900:
+  values:
+    theme-dark: "#f4a0ce"
+    theme-light: "#651d4a"
+$color.palette.rose-950:
+  values:
+    theme-dark: "#fbbcdd"
+    theme-light: "#4d0836"
 
 # ------------------------------------------------------------------
 # ansi — the sixteen terminal slots. A contract with every program the
@@ -298,24 +563,24 @@ $color.ansi.black:
     theme-light: $color.palette.pure-black
 $color.ansi.red:
   values:
-    theme-dark: $color.palette.red-700
-    theme-light: $color.palette.red-700
+    theme-dark: $color.palette.red-800
+    theme-light: $color.palette.red-800
 $color.ansi.green:
   values:
-    theme-dark: $color.palette.green-700
-    theme-light: $color.palette.green-700
+    theme-dark: $color.palette.green-800
+    theme-light: $color.palette.green-800
 $color.ansi.yellow:
   values:
-    theme-dark: $color.palette.yellow-700
-    theme-light: $color.palette.yellow-700
+    theme-dark: $color.palette.yellow-800
+    theme-light: $color.palette.yellow-800
 $color.ansi.blue:
   values:
-    theme-dark: $color.palette.blue-700
-    theme-light: $color.palette.blue-700
+    theme-dark: $color.palette.blue-800
+    theme-light: $color.palette.blue-800
 $color.ansi.magenta:
   values:
-    theme-dark: $color.palette.purple-700
-    theme-light: $color.palette.purple-700
+    theme-dark: $color.palette.purple-800
+    theme-light: $color.palette.purple-800
 $color.ansi.cyan:
   values:
     theme-dark: $color.palette.cyan-800
@@ -365,32 +630,32 @@ $color.ansi.bright-white:
 
 $color.spectrum.red:
   values:
-    theme-dark: $color.palette.red-700
-    theme-light: $color.palette.red-700
+    theme-dark: $color.palette.red-800
+    theme-light: $color.palette.red-800
 $color.spectrum.red-light:
   values:
     theme-dark: $color.palette.red-900
     theme-light: $color.palette.red-900
 $color.spectrum.orange:
   values:
-    theme-dark: $color.palette.orange-700
-    theme-light: $color.palette.orange-700
+    theme-dark: $color.palette.orange-800
+    theme-light: $color.palette.orange-800
 $color.spectrum.orange-light:
   values:
     theme-dark: $color.palette.orange-900
     theme-light: $color.palette.orange-900
 $color.spectrum.yellow:
   values:
-    theme-dark: $color.palette.yellow-700
-    theme-light: $color.palette.yellow-700
+    theme-dark: $color.palette.yellow-800
+    theme-light: $color.palette.yellow-800
 $color.spectrum.yellow-light:
   values:
     theme-dark: $color.palette.yellow-900
     theme-light: $color.palette.yellow-900
 $color.spectrum.green:
   values:
-    theme-dark: $color.palette.green-700
-    theme-light: $color.palette.green-700
+    theme-dark: $color.palette.green-800
+    theme-light: $color.palette.green-800
 $color.spectrum.green-light:
   values:
     theme-dark: $color.palette.green-900
@@ -405,33 +670,36 @@ $color.spectrum.cyan-light:
     theme-light: $color.palette.cyan-900
 $color.spectrum.blue:
   values:
-    theme-dark: $color.palette.blue-700
-    theme-light: $color.palette.blue-700
+    theme-dark: $color.palette.blue-800
+    theme-light: $color.palette.blue-800
 $color.spectrum.blue-light:
   values:
     theme-dark: $color.palette.blue-900
     theme-light: $color.palette.blue-900
 $color.spectrum.indigo:
   values:
-    theme-dark: $color.palette.indigo-700
-    theme-light: $color.palette.indigo-700
+    theme-dark: $color.palette.indigo-800
+    theme-light: $color.palette.indigo-800
 $color.spectrum.indigo-light:
   values:
     theme-dark: $color.palette.indigo-900
     theme-light: $color.palette.indigo-900
 $color.spectrum.purple:
   values:
-    theme-dark: $color.palette.purple-700
-    theme-light: $color.palette.purple-700
+    theme-dark: $color.palette.purple-800
+    theme-light: $color.palette.purple-800
 $color.spectrum.purple-light:
   values:
     theme-dark: $color.palette.purple-900
     theme-light: $color.palette.purple-900
-$color.spectrum.pink:
-  description: No lighter step. The palette has one pink.
+$color.spectrum.rose:
   values:
-    theme-dark: $color.palette.pink-700
-    theme-light: $color.palette.pink-700
+    theme-dark: $color.palette.rose-800
+    theme-light: $color.palette.rose-800
+$color.spectrum.rose-light:
+  values:
+    theme-dark: $color.palette.rose-900
+    theme-light: $color.palette.rose-900
 
 # ------------------------------------------------------------------
 # surface — grounds, darkest first. A tool that cannot express alpha
@@ -634,48 +902,48 @@ $color.syntax.variable:
     theme-light: $color.palette.stone-1000
 $color.syntax.keyword:
   values:
-    theme-dark: $color.palette.cyan-400
-    theme-light: $color.palette.cyan-400
+    theme-dark: $color.palette.cyan-900
+    theme-light: $color.palette.cyan-600
 $color.syntax.string:
   values:
-    theme-dark: $color.palette.green-500
-    theme-light: $color.palette.green-500
+    theme-dark: $color.palette.green-950
+    theme-light: $color.palette.green-800
 $color.syntax.function:
   values:
-    theme-dark: $color.palette.blue-600
-    theme-light: $color.palette.blue-600
+    theme-dark: $color.palette.blue-900
+    theme-light: $color.palette.blue-800
 $color.syntax.type:
   values:
-    theme-dark: $color.palette.yellow-500
-    theme-light: $color.palette.yellow-500
+    theme-dark: $color.palette.yellow-950
+    theme-light: $color.palette.yellow-800
 $color.syntax.number:
   values:
-    theme-dark: $color.palette.orange-700
-    theme-light: $color.palette.orange-700
+    theme-dark: $color.palette.orange-900
+    theme-light: $color.palette.orange-800
 $color.syntax.escape:
   values:
-    theme-dark: $color.palette.orange-700
-    theme-light: $color.palette.orange-700
+    theme-dark: $color.palette.orange-900
+    theme-light: $color.palette.orange-800
 $color.syntax.attribute:
   values:
-    theme-dark: $color.palette.indigo-700
+    theme-dark: $color.palette.indigo-800
     theme-light: $color.palette.indigo-700
 $color.syntax.tag:
   values:
-    theme-dark: $color.palette.red-600
-    theme-light: $color.palette.red-600
+    theme-dark: $color.palette.red-700
+    theme-light: $color.palette.red-700
 $color.syntax.constant:
   values:
-    theme-dark: $color.palette.pink-700
-    theme-light: $color.palette.pink-700
+    theme-dark: $color.palette.rose-900
+    theme-light: $color.palette.rose-900
 $color.syntax.property:
   values:
-    theme-dark: $color.palette.cyan-600
-    theme-light: $color.palette.cyan-600
+    theme-dark: $color.palette.cyan-950
+    theme-light: $color.palette.cyan-700
 $color.syntax.namespace:
   values:
-    theme-dark: $color.palette.orange-500
-    theme-light: $color.palette.orange-500
+    theme-dark: $color.palette.orange-800
+    theme-light: $color.palette.orange-600
 $color.syntax.preprocessor:
   values:
     theme-dark: $color.palette.stone-500
@@ -683,57 +951,68 @@ $color.syntax.preprocessor:
 $color.syntax.emphasis:
   description: Bold and italic runs in prose markup.
   values:
-    theme-dark: $color.palette.red-600
-    theme-light: $color.palette.red-600
+    theme-dark: $color.palette.red-700
+    theme-light: $color.palette.red-700
 
 # bracket — rainbow pairs, outermost first. Six hues that stay apart at
 # a glance; the seventh level wraps back to the first.
+#
+# All six sit on one rung, because nesting depth is the only thing the
+# colors are meant to encode: a level that also read as heavier than its
+# neighbours would be saying something the nesting does not mean. The two
+# that are not levels sit a rung further out, where a signal belongs.
 $color.bracket.1:
   values:
-    theme-dark: $color.palette.cyan-500
+    theme-dark: $color.palette.cyan-600
     theme-light: $color.palette.cyan-500
 $color.bracket.2:
   values:
     theme-dark: $color.palette.yellow-600
-    theme-light: $color.palette.yellow-600
+    theme-light: $color.palette.yellow-500
 $color.bracket.3:
   values:
-    theme-dark: $color.palette.purple-600
-    theme-light: $color.palette.purple-600
+    theme-dark: $color.palette.rose-600
+    theme-light: $color.palette.rose-500
 $color.bracket.4:
   values:
     theme-dark: $color.palette.green-600
-    theme-light: $color.palette.green-600
+    theme-light: $color.palette.green-500
 $color.bracket.5:
   values:
-    theme-dark: $color.palette.cyan-700
-    theme-light: $color.palette.cyan-700
+    theme-dark: $color.palette.blue-600
+    theme-light: $color.palette.blue-500
 $color.bracket.6:
   values:
-    theme-dark: $color.palette.orange-900
-    theme-light: $color.palette.orange-900
+    theme-dark: $color.palette.orange-600
+    theme-light: $color.palette.orange-500
 $color.bracket.unmatched:
   values:
-    theme-dark: $color.palette.red-800
-    theme-light: $color.palette.red-800
+    theme-dark: $color.palette.red-950
+    theme-light: $color.palette.red-900
 $color.bracket.match:
   description: Outline drawn around the pair the caret sits on.
   values:
-    theme-dark: $color.palette.gold-700
-    theme-light: $color.palette.gold-700
+    theme-dark: $color.palette.yellow-900
+    theme-light: $color.palette.yellow-950
 
 # ------------------------------------------------------------------
 # caret and highlight.
 #
 # The three highlights stay separate on purpose. They stack: a find
 # range can hold a selection that holds the word under the caret, so
-# each needs to read through the one beneath it.
+# each needs to read through the one beneath it. The selection is
+# neutral and the other two are yellow, so what separates them is the
+# rung: the find range is the outer, quieter one, and the occurrence
+# sits further out because it is the innermost thing the stack marks.
+# They used to be told apart by chroma instead — the occurrence was a
+# gold at half again the yellow's saturation — which stopped being
+# expressible once a family became one hue at one chroma.
 # ------------------------------------------------------------------
 
 $color.caret.default:
   values:
-    theme-dark: $color.palette.gold-700
-    theme-light: $color.palette.gold-700
+    theme-dark: $color.palette.yellow-900
+    theme-light: $color.palette.yellow-950
 $color.highlight.selection:
   description: Neutral so it can sit under syntax colors without tinting them.
   values:
@@ -742,12 +1021,12 @@ $color.highlight.selection:
 $color.highlight.occurrence:
   description: Other instances of the symbol under the caret.
   values:
-    theme-dark: $color.palette.gold-500
-    theme-light: $color.palette.gold-500
+    theme-dark: $color.palette.yellow-900
+    theme-light: $color.palette.yellow-900
 $color.highlight.find-range:
   values:
-    theme-dark: $color.palette.yellow-700
-    theme-light: $color.palette.yellow-700
+    theme-dark: $color.palette.yellow-800
+    theme-light: $color.palette.yellow-800
 $color.highlight.find-match:
   description: The one hit the cursor is on, filled solid and outlined.
   values:
@@ -774,40 +1053,40 @@ $color.highlight.range:
 
 $color.state.error:
   values:
-    theme-dark: $color.palette.red-700
-    theme-light: $color.palette.red-700
+    theme-dark: $color.palette.red-800
+    theme-light: $color.palette.red-800
 $color.state.warning:
   values:
-    theme-dark: $color.palette.yellow-700
-    theme-light: $color.palette.yellow-700
+    theme-dark: $color.palette.yellow-800
+    theme-light: $color.palette.yellow-800
 $color.state.info:
   values:
-    theme-dark: $color.palette.blue-700
-    theme-light: $color.palette.blue-700
+    theme-dark: $color.palette.blue-800
+    theme-light: $color.palette.blue-800
 $color.state.success:
   values:
-    theme-dark: $color.palette.green-700
-    theme-light: $color.palette.green-700
+    theme-dark: $color.palette.green-800
+    theme-light: $color.palette.green-800
 $color.state.added:
   values:
-    theme-dark: $color.palette.green-700
-    theme-light: $color.palette.green-700
+    theme-dark: $color.palette.green-800
+    theme-light: $color.palette.green-800
 $color.state.modified:
   description: >-
     Every surface that marks an edit — gutter, git decoration, tab
     border — resolves here. The source theme used four different
     colors for it.
   values:
-    theme-dark: $color.palette.blue-700
-    theme-light: $color.palette.blue-700
+    theme-dark: $color.palette.blue-800
+    theme-light: $color.palette.blue-800
 $color.state.deleted:
   values:
-    theme-dark: $color.palette.red-700
-    theme-light: $color.palette.red-700
+    theme-dark: $color.palette.red-800
+    theme-light: $color.palette.red-800
 $color.state.conflict:
   values:
-    theme-dark: $color.palette.yellow-700
-    theme-light: $color.palette.yellow-700
+    theme-dark: $color.palette.yellow-800
+    theme-light: $color.palette.yellow-800
 $color.state.ignored:
   values:
     theme-dark: $color.palette.stone-600
@@ -817,33 +1096,33 @@ $color.state.ignored:
 # pair of hues and differ only in how far the alpha is pulled back.
 $color.diff.added-fill:
   values:
-    theme-dark: $color.palette.green-700/60
-    theme-light: $color.palette.green-700/60
+    theme-dark: $color.palette.green-800/60
+    theme-light: $color.palette.green-800/60
 $color.diff.added-fill-muted:
   values:
-    theme-dark: $color.palette.green-700/40
-    theme-light: $color.palette.green-700/40
+    theme-dark: $color.palette.green-800/40
+    theme-light: $color.palette.green-800/40
 $color.diff.added-fill-subtle:
   values:
-    theme-dark: $color.palette.green-700/20
-    theme-light: $color.palette.green-700/20
+    theme-dark: $color.palette.green-800/20
+    theme-light: $color.palette.green-800/20
 $color.diff.added-word:
   values:
-    theme-dark: $color.palette.green-700
-    theme-light: $color.palette.green-700
+    theme-dark: $color.palette.green-800
+    theme-light: $color.palette.green-800
 $color.diff.removed-fill:
   values:
-    theme-dark: $color.palette.red-700/60
-    theme-light: $color.palette.red-700/60
+    theme-dark: $color.palette.red-800/60
+    theme-light: $color.palette.red-800/60
 $color.diff.removed-fill-muted:
   values:
-    theme-dark: $color.palette.red-700/40
-    theme-light: $color.palette.red-700/40
+    theme-dark: $color.palette.red-800/40
+    theme-light: $color.palette.red-800/40
 $color.diff.removed-fill-subtle:
   values:
-    theme-dark: $color.palette.red-700/20
-    theme-light: $color.palette.red-700/20
+    theme-dark: $color.palette.red-800/20
+    theme-light: $color.palette.red-800/20
 $color.diff.removed-word:
   values:
-    theme-dark: $color.palette.red-700
-    theme-light: $color.palette.red-700
+    theme-dark: $color.palette.red-800
+    theme-light: $color.palette.red-800

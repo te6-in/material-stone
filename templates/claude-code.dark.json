@@ -69,7 +69,7 @@
     "green_FOR_SUBAGENTS_ONLY": "${$color.spectrum.green}",
     "blue_FOR_SUBAGENTS_ONLY": "${$color.spectrum.blue}",
     "purple_FOR_SUBAGENTS_ONLY": "${$color.spectrum.purple}",
-    "pink_FOR_SUBAGENTS_ONLY": "${$color.spectrum.pink}",
+    "pink_FOR_SUBAGENTS_ONLY": "${$color.spectrum.rose}",
     "cyan_FOR_SUBAGENTS_ONLY": "${$color.spectrum.cyan}",
 
     "rainbow_red": "${$color.spectrum.red}",
