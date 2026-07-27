@@ -2,7 +2,7 @@
 	"name": "material-stone",
 	"displayName": "Material Stone Themes",
 	"description": "Warm-stone dark/light themes. High contrast by default.",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "te6",
 	"license": "GPL-3.0-only",
 	"engines": {
